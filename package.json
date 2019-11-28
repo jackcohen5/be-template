@@ -1,0 +1,60 @@
+{
+  "name": "be-template",
+  "version": "1.0.0",
+  "main": "src/handler.js",
+  "license": "MIT",
+  "scripts": {
+    "sls": "sls --config ./infrastructure/serverless.yml",
+    "deploy:env": "yarn sls deploy --stage $NODE_ENV",
+    "deploy": "export NODE_ENV=development && yarn deploy:env",
+    "deploy:production": "export NODE_ENV=production && yarn deploy:env",
+    "deploy:staging": "export NODE_ENV=staging && yarn deploy:env",
+    "lint": "eslint src --ext js --no-ignore",
+    "flint": "yarn lint --fix",
+    "serve": "yarn sls offline -P 8080",
+    "start": "nodemon -e js,yml -x yarn serve",
+    "tail": "yarn sls logs --tail --function",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "build": "yarn sls webpack"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
+    "@tophat/eslint-config": "^0.3.1",
+    "babel-jest": "^24.9.0",
+    "babel-loader": "^8.0.6",
+    "eslint": "^6.6.0",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^23.0.4",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.1",
+    "husky": "^3.1.0",
+    "jest": "^24.9.0",
+    "lint-staged": "^9.4.3",
+    "nodemon": "^1.19.4",
+    "prettier": "^1.19.1",
+    "serverless": "^1.58.0",
+    "serverless-offline": "^5.12.0",
+    "serverless-webpack": "^5.3.1",
+    "webpack": "^4.41.2"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.573.0",
+    "jsonwebtoken": "^8.5.1",
+    "jwks-rsa": "^1.6.0",
+    "uuid": "^3.3.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js}": [
+      "yarn lint",
+      "yarn test"
+    ]
+  }
+}

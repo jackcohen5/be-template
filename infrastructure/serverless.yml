@@ -1,0 +1,133 @@
+service: be-TEMPLATE_NAME-service
+
+custom:
+    stage: ${opt:stage, "development"}
+    s3:
+        bucketName: be-TEMPLATE_NAME-bucket-${self:custom.stage}
+    dynamoDb:
+        tableName: be-TEMPLATE_NAME-${self:custom.stage}
+        billingMode: PAY_PER_REQUEST
+    common:
+        deletionPolicies:
+            development: Delete
+            default: Retain
+        deletionPolicy: ${self:custom.common.deletionPolicies.${self:custom.stage}, self:custom.common.deletionPolicies.default}
+    authorizer:
+        name: authorizer
+        identitySource: method.request.header.Authorization
+        type: token
+    webpack:
+        webpackConfig: ./webpack.config.js
+        packager: 'yarn'
+
+package:
+  individually: true
+
+### PLUGINS
+
+plugins:
+    - serverless-webpack
+    - serverless-offline
+
+### RESOURCES
+
+resources:
+    - ${file(./infrastructure/resources/DB.yml)}
+    - ${file(./infrastructure/resources/S3.yml)}
+
+### PROVIDER
+
+provider:
+    name: aws
+    runtime: nodejs10.x
+    region: ca-central-1
+    stage: ${self:custom.stage}
+    environment:
+        REGION: ${self:provider.region}
+        S3_BUCKET_NAME: ${self:custom.s3.bucketName}
+        DYNAMODB_TABLE: ${self:custom.dynamoDb.tableName}
+    iamRoleStatements:
+        - Effect: "Allow"
+          Action:
+            - "s3:PutObject"
+          Resource:
+            - "arn:aws:s3:::${self:custom.s3.bucketName}/*"
+        - Effect: Allow
+          Action:
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+          Resource:
+            - "arn:aws:dynamodb:::table/${self:custom.dynamoDb.tableName}"
+            - "arn:aws:dynamodb:::table/${self:custom.dynamoDb.tableName}/index/*"
+
+### FUNCTIONS
+
+functions:
+    authorizer:
+        handler: src/functions/authorizer/index.default
+
+    list:
+        handler: src/functions/list/index.default
+        events:
+            - http:
+                path: /TEMPLATE_NAME/
+                method: get
+                cors: true
+                authorizer: ${self:custom.authorizer}
+
+    create:
+        handler: src/functions/create/index.default
+        events:
+            - http:
+                path: /TEMPLATE_NAME/
+                method: post
+                cors: true
+                authorizer: ${self:custom.authorizer}
+
+    put:
+        handler: src/functions/put/index.default
+        events:
+            - http:
+                path: /TEMPLATE_NAME/{itemId}/
+                method: put
+                request:
+                    parameters:
+                        paths:
+                            itemId: true
+                cors: true
+                authorizer: ${self:custom.authorizer}
+
+    get:
+        handler: src/functions/get/index.default
+        events:
+            - http:
+                path: /TEMPLATE_NAME/{itemId}/
+                method: get
+                request:
+                    parameters:
+                        paths:
+                            itemId: true
+                cors: true
+                authorizer: ${self:custom.authorizer}
+
+    delete:
+        handler: src/functions/delete/index.default
+        events:
+            - http:
+                path: /TEMPLATE_NAME/{itemId}/
+                method: delete
+                request:
+                    parameters:
+                        paths:
+                            itemId: true
+                cors: true
+                authorizer: ${self:custom.authorizer}
+
+    upload:
+        handler: src/functions/upload/index.default
+        events:
+            - http:
+                method: post
+                path: /TEMPLATE_NAME/upload/
+                cors: true
+                authorizer: ${self:custom.authorizer}

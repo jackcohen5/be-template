@@ -1,0 +1,18 @@
+Resources:
+# DynamoDB
+    DynamoDBTableTEMPLATE_NAME:
+        Type: AWS::DynamoDB::Table
+        DeletionPolicy: ${self:custom.common.deletionPolicy}
+        Properties:
+            TableName: ${self:custom.dynamoDb.tableName}
+            BillingMode: ${self:custom.dynamoDb.billingMode}
+            AttributeDefinitions:
+                - AttributeName: userId
+                  AttributeType: S
+                - AttributeName: itemId
+                  AttributeType: S
+            KeySchema:
+                - AttributeName: userId
+                  KeyType: HASH
+                - AttributeName: itemId
+                  KeyType: RANGE
