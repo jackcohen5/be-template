@@ -7,6 +7,10 @@ This template service gives you the latest in modern JavaScript (ES6 via Webpack
 
 Once installed, you can create and deploy functions with the latest ES6 features in minutes, with linting and formatting baked in.
 
+## TODO
+
+1. Convert unit tests into integration tests, benchmark cost/time penalties of spinning up test environments on CI
+
 ## Install
 
 ```bash
