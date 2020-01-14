@@ -22,7 +22,7 @@ Resources:
                             - PUT
                             - HEAD
                         MaxAge: 3000
-    PutLambdaPermissionIdentificationS3:
+    S3PutLambdaPermissionTEMPLATE_NAME:
         Type: AWS::Lambda::Permission
         Properties:
             SourceArn: arn:aws:s3:::${self:custom.s3.bucketName}
