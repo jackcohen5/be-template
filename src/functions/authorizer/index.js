@@ -10,7 +10,31 @@ const getSigningKey = async kid => {
     return promisify(client.getSigningKey)(kid)
 }
 
-export const authorize = async event => {
+const generatePolicy = (principalId, effect, resource) => {
+    const authResponse = {
+        principalId: principalId,
+        context: {
+            userId: principalId,
+        },
+    }
+
+    if (effect && resource) {
+        authResponse.policyDocument = {
+            Version: '2012-10-17',
+            Statement: [
+                {
+                    Action: 'execute-api:Invoke',
+                    Effect: effect,
+                    Resource: resource,
+                },
+            ],
+        }
+    }
+
+    return authResponse
+}
+
+const Authorize = async event => {
     try {
         const splitAuthHeader = event.authorizationToken.split(' ')
         const token =
@@ -36,26 +60,4 @@ export const authorize = async event => {
     }
 }
 
-const generatePolicy = (principalId, effect, resource) => {
-    const authResponse = {
-        principalId: principalId,
-        context: {
-            userId: principalId,
-        },
-    }
-
-    if (effect && resource) {
-        authResponse.policyDocument = {
-            Version: '2012-10-17',
-            Statement: [
-                {
-                    Action: 'execute-api:Invoke',
-                    Effect: effect,
-                    Resource: resource,
-                },
-            ],
-        }
-    }
-
-    return authResponse
-}
+export default Authorize
