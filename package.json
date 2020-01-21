@@ -9,6 +9,8 @@
     "deploy": "export NODE_ENV=development && yarn deploy:env",
     "deploy:production": "export NODE_ENV=production && yarn deploy:env",
     "deploy:staging": "export NODE_ENV=staging && yarn deploy:env",
+    "clean:env": "yarn sls deploy --stage $NODE_ENV",
+    "clean": "export NODE_ENV=development && yarn clean:env",
     "lint": "eslint src --ext js --no-ignore",
     "flint": "yarn lint --fix",
     "serve": "yarn sls offline -P 8080",
