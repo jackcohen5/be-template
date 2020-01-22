@@ -42,11 +42,11 @@ Assuming you've already set up your default AWS credentials:
 yarn deploy
 ```
 
-`yarn deploy` will deploy to the `development` environment. You can deploy to `stage` or `production`
+`yarn deploy` will deploy to the `development` environment. You can deploy to `staging` or `production`
 with:
 
 ```bash
-yarn deploy:stage
+yarn deploy:staging
 
 # -- or --
 
@@ -55,3 +55,13 @@ yarn deploy:production
 
 After you've deployed, the output of the deploy script will give you the API endpoint
 for your deployed function(s), so you should be able to test the deployed API via that URL.
+
+## Cleaning Up
+
+Assuming you're finished with your environment, you can delete the stack with:
+
+```bash
+yarn cleanup
+```
+
+`yarn cleanup` will remove the `development` environment.
