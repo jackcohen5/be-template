@@ -1,11 +1,11 @@
 import { DynamoDB } from './AWS'
 
-export const list = async userId => {
+export const list = async pk => {
     const params = {
         TableName: process.env.DYNAMODB_TABLE,
-        KeyConditionExpression: 'userId = :userId',
+        KeyConditionExpression: 'pk = :pk',
         ExpressionAttributeValues: {
-            ':userId': userId,
+            ':pk': pk,
         },
     }
 
@@ -13,12 +13,12 @@ export const list = async userId => {
     return result.Items
 }
 
-export const get = async (userId, itemId) => {
+export const get = async ({ pk, sk }) => {
     const params = {
         TableName: process.env.DYNAMODB_TABLE,
         Key: {
-            userId,
-            itemId,
+            pk,
+            sk,
         },
     }
 
@@ -26,12 +26,13 @@ export const get = async (userId, itemId) => {
     return result.Item
 }
 
-export const put = async (userId, itemId) => {
+export const put = async ({ pk, sk, data }) => {
     const params = {
         TableName: process.env.DYNAMODB_TABLE,
         Item: {
-            userId,
-            itemId,
+            pk,
+            sk,
+            data,
         },
     }
 
@@ -39,12 +40,12 @@ export const put = async (userId, itemId) => {
     return params.Item
 }
 
-export const deleteItem = async (userId, itemId) => {
+export const deleteItem = async ({ pk, sk }) => {
     const params = {
         TableName: process.env.DYNAMODB_TABLE,
         Key: {
-            userId,
-            itemId,
+            pk,
+            sk,
         },
     }
 

@@ -16,7 +16,7 @@
     "serve": "yarn sls offline -P 8080",
     "start": "nodemon -e js,yml -x yarn serve",
     "tail": "yarn sls logs --tail --function",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "test:watch": "jest --watch",
     "build": "yarn sls webpack"
   },
@@ -54,7 +54,7 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{js}": [
+    "src/**/*.js": [
       "yarn lint",
       "yarn test"
     ]

@@ -1,6 +1,6 @@
 module.exports = {
     roots: ['<rootDir>/src'],
-    testRegex: '(.*\\.test\\.js)$',
+    testRegex: '((\\.|/*.)(test))\\.js?$',
     transform: {
         '^.+\\.js$': 'babel-jest',
     },
