@@ -1,8 +1,6 @@
-# NetworkJS
+# be-template
 [![CircleCI](https://circleci.com/gh/jackcohen5/be-template.svg?style=svg)](https://circleci.com/gh/jackcohen5/be-template)
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=jackcohen5/be-template)](https://dependabot.com)
-
-# be-template
 
 This template service gives you the latest in modern JavaScript (ES6 via Webpack + Babel, testing with Jest, linting with ESLint, and formatting with Prettier), the ease and power of Serverless, and bootstrapped DynamoDB and S3 infrastructure.
 
