@@ -3,7 +3,9 @@ import { errorResponse, successResponse } from 'services/Lambda'
 const BaseView = f => async (event, ...otherParams) => {
     try {
         const enhancedEvent = {
-            itemId: event.pathParameters ? event.pathParameters.itemId : null,
+            TEMPLATE_NAME_SK: event.pathParameters
+                ? event.pathParameters.TEMPLATE_NAME_SK
+                : null,
             userId:
                 event.requestContext && event.requestContext.authorizer
                     ? event.requestContext.authorizer.userId

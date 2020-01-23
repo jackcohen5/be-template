@@ -88,12 +88,12 @@ functions:
         handler: src/functions/put/index.default
         events:
             - http:
-                path: /TEMPLATE_NAME/{itemId}/
+                path: /TEMPLATE_NAME/{TEMPLATE_NAME_SK}/
                 method: put
                 request:
                     parameters:
                         paths:
-                            itemId: true
+                            TEMPLATE_NAME_SK: true
                 cors: true
                 authorizer: ${self:custom.authorizer}
 
@@ -101,12 +101,12 @@ functions:
         handler: src/functions/get/index.default
         events:
             - http:
-                path: /TEMPLATE_NAME/{itemId}/
+                path: /TEMPLATE_NAME/{TEMPLATE_NAME_SK}/
                 method: get
                 request:
                     parameters:
                         paths:
-                            itemId: true
+                            TEMPLATE_NAME_SK: true
                 cors: true
                 authorizer: ${self:custom.authorizer}
 
@@ -114,12 +114,12 @@ functions:
         handler: src/functions/delete/index.default
         events:
             - http:
-                path: /TEMPLATE_NAME/{itemId}/
+                path: /TEMPLATE_NAME/{TEMPLATE_NAME_SK}/
                 method: delete
                 request:
                     parameters:
                         paths:
-                            itemId: true
+                            TEMPLATE_NAME_SK: true
                 cors: true
                 authorizer: ${self:custom.authorizer}
 
