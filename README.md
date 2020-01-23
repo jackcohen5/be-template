@@ -1,4 +1,5 @@
 # be-template
+
 [![CircleCI](https://circleci.com/gh/jackcohen5/be-template.svg?style=svg)](https://circleci.com/gh/jackcohen5/be-template)
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=jackcohen5/be-template)](https://dependabot.com)
 
