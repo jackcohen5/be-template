@@ -7,12 +7,12 @@ Resources:
             TableName: ${self:custom.dynamoDb.tableName}
             BillingMode: ${self:custom.dynamoDb.billingMode}
             AttributeDefinitions:
-                - AttributeName: userId
+                - AttributeName: pk
                   AttributeType: S
-                - AttributeName: itemId
+                - AttributeName: sk
                   AttributeType: S
             KeySchema:
-                - AttributeName: userId
+                - AttributeName: pk
                   KeyType: HASH
-                - AttributeName: itemId
+                - AttributeName: sk
                   KeyType: RANGE
