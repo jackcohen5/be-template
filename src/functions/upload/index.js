@@ -5,7 +5,8 @@ import { generateUploadUrl } from 'services/S3'
 
 const UploadView = async ({ userId }) => {
     const itemId = uuid.v4()
-    const url = await generateUploadUrl(userId, itemId)
+    const key = `${userId}/${itemId}`
+    const url = await generateUploadUrl(key)
     return { data: url }
 }
 
