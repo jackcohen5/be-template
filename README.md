@@ -1,5 +1,6 @@
-<!-- [![Greenkeeper badge](https://badges.greenkeeper.io/postlight/serverless-babel-starter.svg)](https://greenkeeper.io/)
-[![CircleCI](https://circleci.com/gh/postlight/serverless-babel-starter/tree/master.svg?style=svg)](https://circleci.com/gh/postlight/serverless-babel-starter/tree/master) -->
+# NetworkJS
+[![CircleCI](https://circleci.com/gh/jackcohen5/be-template.svg?style=svg)](https://circleci.com/gh/jackcohen5/be-template)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=jackcohen5/be-template)](https://dependabot.com)
 
 # be-template
 
