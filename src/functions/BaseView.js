@@ -10,6 +10,7 @@ const BaseView = f => async (event, ...otherParams) => {
                 event.requestContext && event.requestContext.authorizer
                     ? event.requestContext.authorizer.userId
                     : null,
+            body: event.body ? JSON.parse(event.body) : {},
         }
         const { data, statusCode = 200 } = await f(
             enhancedEvent,
