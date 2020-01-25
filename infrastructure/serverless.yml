@@ -26,6 +26,7 @@ package:
 ### PLUGINS
 
 plugins:
+    - serverless-iam-roles-per-function
     - serverless-webpack
     - serverless-offline
 
@@ -46,19 +47,6 @@ provider:
         REGION: ${self:provider.region}
         S3_BUCKET_NAME: ${self:custom.s3.bucketName}
         DYNAMODB_TABLE: ${self:custom.dynamoDb.tableName}
-    iamRoleStatements:
-        - Effect: "Allow"
-          Action:
-            - "s3:PutObject"
-          Resource:
-            - "arn:aws:s3:::${self:custom.s3.bucketName}/*"
-        - Effect: Allow
-          Action:
-            - dynamodb:GetItem
-            - dynamodb:PutItem
-          Resource:
-            - "arn:aws:dynamodb:::table/${self:custom.dynamoDb.tableName}"
-            - "arn:aws:dynamodb:::table/${self:custom.dynamoDb.tableName}/index/*"
 
 ### FUNCTIONS
 
@@ -68,6 +56,12 @@ functions:
 
     list:
         handler: src/functions/list/index.default
+        iamRoleStatementsName: TEMPLATE_NAME-${self:custom.stage}-list-role
+        iamRoleStatements:
+          - Effect: "Allow"
+            Action:
+              - dynamodb:Query
+            Resource: "arn:aws:dynamodb:::table/${self:custom.dynamoDb.tableName}"
         events:
             - http:
                 path: /TEMPLATE_NAME/
@@ -77,6 +71,12 @@ functions:
 
     create:
         handler: src/functions/create/index.default
+        iamRoleStatementsName: TEMPLATE_NAME-${self:custom.stage}-create-role
+        iamRoleStatements:
+          - Effect: "Allow"
+            Action:
+              - dynamodb:PutItem
+            Resource: "arn:aws:dynamodb:::table/${self:custom.dynamoDb.tableName}"
         events:
             - http:
                 path: /TEMPLATE_NAME/
@@ -86,6 +86,12 @@ functions:
 
     put:
         handler: src/functions/put/index.default
+        iamRoleStatementsName: TEMPLATE_NAME-${self:custom.stage}-put-role
+        iamRoleStatements:
+          - Effect: "Allow"
+            Action:
+              - dynamodb:PutItem
+            Resource: "arn:aws:dynamodb:::table/${self:custom.dynamoDb.tableName}"
         events:
             - http:
                 path: /TEMPLATE_NAME/{TEMPLATE_NAME_SK}/
@@ -99,6 +105,12 @@ functions:
 
     get:
         handler: src/functions/get/index.default
+        iamRoleStatementsName: TEMPLATE_NAME-${self:custom.stage}-get-role
+        iamRoleStatements:
+          - Effect: "Allow"
+            Action:
+              - dynamodb:GetItem
+            Resource: "arn:aws:dynamodb:::table/${self:custom.dynamoDb.tableName}"
         events:
             - http:
                 path: /TEMPLATE_NAME/{TEMPLATE_NAME_SK}/
@@ -112,6 +124,12 @@ functions:
 
     delete:
         handler: src/functions/delete/index.default
+        iamRoleStatementsName: TEMPLATE_NAME-${self:custom.stage}-delete-role
+        iamRoleStatements:
+          - Effect: "Allow"
+            Action:
+              - dynamodb:DeleteItem
+            Resource: "arn:aws:dynamodb:::table/${self:custom.dynamoDb.tableName}"
         events:
             - http:
                 path: /TEMPLATE_NAME/{TEMPLATE_NAME_SK}/
@@ -125,6 +143,12 @@ functions:
 
     upload:
         handler: src/functions/upload/index.default
+        iamRoleStatementsName: TEMPLATE_NAME-${self:custom.stage}-upload-role
+        iamRoleStatements:
+          - Effect: "Allow"
+            Action:
+              - s3:PutObject
+            Resource: "arn:aws:s3:::${self:custom.s3.bucketName}/*"
         events:
             - http:
                 method: post
