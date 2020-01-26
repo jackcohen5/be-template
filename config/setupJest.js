@@ -9,5 +9,6 @@ jest.mock('services/DynamoDB', () => ({
 }))
 
 jest.mock('services/S3', () => ({
-    generateUploadUrl: () => 'some_url',
+    generateDownloadUrl: () => 'download-url',
+    generateUploadUrl: () => 'upload-url',
 }))

@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`upload executes as expected 1`] = `
+exports[`download executes as expected 1`] = `
 Object {
-  "body": "{\\"data\\":\\"upload-url\\"}",
+  "body": "{\\"data\\":\\"download-url\\"}",
   "headers": Object {
     "Access-Control-Allow-Origin": "*",
   },
