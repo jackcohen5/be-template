@@ -1,10 +1,16 @@
+import { Roles } from 'functions/BaseView'
+
 // COMMON
 export const mockUserId1 = 'user_id_1'
 
 // LAMBDA
-export const authenticatedEvent = {
-    requestContext: { authorizer: { userId: mockUserId1 } },
-}
+export const makeAuthenticatedEvent = ({
+    roles = [Roles.TEMPLATE_NAME_ROLE1],
+} = {}) => ({
+    requestContext: { authorizer: { userId: mockUserId1, roles } },
+})
+
+export const authenticatedEvent = makeAuthenticatedEvent()
 
 // ITEM
 export const mockItem1 = {

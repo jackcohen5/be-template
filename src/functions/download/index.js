@@ -1,4 +1,4 @@
-import { Role1View } from 'functions/BaseView'
+import { Role2View } from 'functions/BaseView'
 import { generateDownloadUrl } from 'services/S3'
 
 const DownloadView = async ({
@@ -10,4 +10,4 @@ const DownloadView = async ({
     return { data: url }
 }
 
-export default Role1View(DownloadView)
+export default Role2View(DownloadView)
