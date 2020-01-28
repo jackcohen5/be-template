@@ -1,9 +1,9 @@
 import uuid from 'uuid'
 
-import BaseView from 'functions/BaseView'
+import { Role1View } from 'functions/BaseView'
 import { put as PutItem } from 'services/DynamoDB'
 
-const CreateView = async ({ userId, body: data }) => {
+const CreateView = async ({ auth: { userId }, body: data }) => {
     const TEMPLATE_NAME_SK = uuid.v4()
     const pk = `USER#${userId}`
     const sk = `ORDER#${TEMPLATE_NAME_SK}`
@@ -11,4 +11,4 @@ const CreateView = async ({ userId, body: data }) => {
     return { data: item, statusCode: 201 }
 }
 
-export default BaseView(CreateView)
+export default Role1View(CreateView)

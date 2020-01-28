@@ -1,11 +1,14 @@
-import BaseView from 'functions/BaseView'
+import { Role1View } from 'functions/BaseView'
 import { deleteItem as DeleteItem } from 'services/DynamoDB'
 
-const DeleteView = async ({ TEMPLATE_NAME_SK, userId }) => {
+const DeleteView = async ({
+    auth: { userId },
+    pathParameters: { TEMPLATE_NAME_SK },
+}) => {
     const pk = `USER#${userId}`
     const sk = `ORDER#${TEMPLATE_NAME_SK}`
     const item = await DeleteItem({ pk, sk })
     return { data: item }
 }
 
-export default BaseView(DeleteView)
+export default Role1View(DeleteView)

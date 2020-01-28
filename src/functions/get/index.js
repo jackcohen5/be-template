@@ -1,11 +1,14 @@
-import BaseView from 'functions/BaseView'
+import { Role1View } from 'functions/BaseView'
 import { get as GetItem } from 'services/DynamoDB'
 
-const GetView = async ({ TEMPLATE_NAME_SK, userId }) => {
+const GetView = async ({
+    auth: { userId },
+    pathParameters: { TEMPLATE_NAME_SK },
+}) => {
     const pk = `USER#${userId}`
     const sk = `ORDER#${TEMPLATE_NAME_SK}`
     const item = await GetItem({ pk, sk })
     return { data: item }
 }
 
-export default BaseView(GetView)
+export default Role1View(GetView)
