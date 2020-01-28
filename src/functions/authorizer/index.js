@@ -3,18 +3,25 @@ import { promisify } from 'util'
 import jwt from 'jsonwebtoken'
 import jwksClient from 'jwks-rsa'
 
+import {
+    AUTH0_AUDIENCE,
+    AUTH0_DOMAIN,
+    ROLES_CLAIM_KEY,
+} from './authorizer.constants'
+
 const getSigningKey = async kid => {
     const client = jwksClient({
-        jwksUri: 'https://TEMPLATE_NAME_AUTH0_DOMAIN/.well-known/jwks.json',
+        jwksUri: `${AUTH0_DOMAIN}.well-known/jwks.json`,
     })
     return promisify(client.getSigningKey)(kid)
 }
 
-const generatePolicy = (principalId, effect, resource) => {
+const generatePolicy = ({ effect, resource, roles = [], userId }) => {
     const authResponse = {
-        principalId: principalId,
+        principalId: userId,
         context: {
-            userId: principalId,
+            userId,
+            roles,
         },
     }
 
@@ -43,20 +50,37 @@ const Authorize = async event => {
                 : event.authorizationToken
         const decoded = jwt.decode(token, { complete: true })
         try {
+            if (decoded.payload.iss !== AUTH0_DOMAIN) {
+                throw new Error('Auth Error: JWT issuer does not match domain')
+            }
+
             const signingKey = await getSigningKey(decoded.header.kid)
             const key = signingKey.publicKey || signingKey.rsaPublicKey
             jwt.verify(token, key, {
                 algorithm: ['RS256'],
-                audience: 'TEMPLATE_NAME_AUTH0_AUDIENCE',
+                audience: AUTH0_AUDIENCE,
             })
-            return generatePolicy(decoded.payload.sub, 'Allow', '*')
+            return generatePolicy({
+                effect: 'Allow',
+                resource: '*',
+                roles: decoded.payload[ROLES_CLAIM_KEY],
+                userId: decoded.payload.sub,
+            })
         } catch (err) {
             console.error(err)
-            return generatePolicy(decoded.payload.sub, 'Deny', event.methodArn)
+            return generatePolicy({
+                effect: 'Deny',
+                resource: event.methodArn,
+                userId: decoded.payload.sub,
+            })
         }
     } catch (err) {
         console.error(err)
-        return generatePolicy('Unauthorized', 'Deny', event.methodArn)
+        return generatePolicy({
+            effect: 'Deny',
+            resource: event.methodArn,
+            userId: 'Unauthorized',
+        })
     }
 }
 
