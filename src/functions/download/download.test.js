@@ -1,12 +1,12 @@
 import { Roles } from 'functions/BaseView'
 
-import { authenticatedEvent, makeAuthenticatedEvent } from '../../../mocks'
+import { makeAuthenticatedEvent, role1AuthenticatedEvent } from '../../../mocks'
 
 import download from '.'
 
 describe('download', () => {
     it('returns a 403 if role 1', async () => {
-        const response = await download(authenticatedEvent)
+        const response = await download(role1AuthenticatedEvent)
         expect(response).toMatchSnapshot()
     })
 

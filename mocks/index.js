@@ -10,7 +10,7 @@ export const makeAuthenticatedEvent = ({
     requestContext: { authorizer: { userId: mockUserId1, roles } },
 })
 
-export const authenticatedEvent = makeAuthenticatedEvent()
+export const role1AuthenticatedEvent = makeAuthenticatedEvent()
 
 // ITEM
 export const mockItem1 = {
