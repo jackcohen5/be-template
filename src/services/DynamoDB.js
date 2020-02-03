@@ -1,12 +1,16 @@
 import { DynamoDB } from './AWS'
 
-export const list = async pk => {
+export const list = async ({ pk, sk }) => {
+    let KeyConditionExpression = 'pk = :pk'
+    const ExpressionAttributeValues = { ':pk': pk }
+    if (sk) {
+        KeyConditionExpression += ' and begins_with(sk, :sk)'
+        ExpressionAttributeValues[':sk'] = sk
+    }
     const params = {
         TableName: process.env.DYNAMODB_TABLE,
-        KeyConditionExpression: 'pk = :pk',
-        ExpressionAttributeValues: {
-            ':pk': pk,
-        },
+        KeyConditionExpression,
+        ExpressionAttributeValues,
     }
 
     const result = await DynamoDB.query(params).promise()
