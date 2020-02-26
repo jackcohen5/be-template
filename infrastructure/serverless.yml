@@ -44,6 +44,7 @@ provider:
     region: ca-central-1
     stage: ${self:custom.stage}
     environment:
+        AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
         REGION: ${self:provider.region}
         S3_BUCKET_NAME: ${self:custom.s3.bucketName}
         DYNAMODB_TABLE: ${self:custom.dynamoDb.tableName}
