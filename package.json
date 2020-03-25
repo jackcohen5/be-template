@@ -50,7 +50,7 @@
     "aws-sdk": "^2.644.0",
     "jsonwebtoken": "^8.5.1",
     "jwks-rsa": "^1.7.0",
-    "uuid": "^3.3.3"
+    "uuid": "^7.0.2"
   },
   "husky": {
     "hooks": {
