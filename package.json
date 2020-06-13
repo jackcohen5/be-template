@@ -13,7 +13,7 @@
     "cleanup": "export NODE_ENV=development && yarn cleanup:env",
     "lint": "eslint src --ext js --no-ignore",
     "flint": "yarn lint --fix",
-    "serve": "yarn sls offline -P 8080",
+    "serve": "yarn sls offline --httpPort 8080",
     "start": "nodemon -e js,yml -x yarn serve",
     "tail": "yarn sls logs --tail --function",
     "test": "jest --passWithNoTests",
@@ -41,7 +41,6 @@
     "nodemon": "^2.0.3",
     "prettier": "^2.0.5",
     "serverless": "^1.72.0",
-    "serverless-iam-roles-per-function": "^2.0.2",
     "serverless-offline": "^6.1.4",
     "serverless-webpack": "^5.3.1",
     "webpack": "^4.43.0"
