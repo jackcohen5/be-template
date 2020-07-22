@@ -28,6 +28,7 @@ package:
 ### PLUGINS
 
 plugins:
+    - serverless-dotenv-plugin
     - serverless-webpack
     - serverless-offline
 
@@ -51,6 +52,7 @@ provider:
         DYNAMODB_TABLE: ${self:custom.dynamoDb.tableName}
         S3_BUCKET_NAME: ${self:custom.s3.bucketName}
         SQS_QUEUE: ${self:custom.sqs.queueName}
+        SOME_DOTENV_VAR: ${env:SOME_DOTENV_VAR}
     iamRoleStatements:
       - Effect: "Allow"
         Action:
