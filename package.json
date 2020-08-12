@@ -46,7 +46,7 @@
     "webpack": "^4.44.1"
   },
   "dependencies": {
-    "aws-sdk": "^2.730.0",
+    "aws-sdk": "^2.731.0",
     "jsonwebtoken": "^8.5.1",
     "jwks-rsa": "^1.8.1",
     "uuid": "^8.3.0"
