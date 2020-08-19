@@ -48,7 +48,7 @@
   "dependencies": {
     "aws-sdk": "^2.734.0",
     "jsonwebtoken": "^8.5.1",
-    "jwks-rsa": "^1.8.1",
+    "jwks-rsa": "^1.9.0",
     "uuid": "^8.3.0"
   },
   "husky": {
