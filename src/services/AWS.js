@@ -1,4 +1,7 @@
-import AWS from 'aws-sdk'
+import AWSBase from 'aws-sdk'
+import AWSXRay from 'aws-xray-sdk-core'
+
+const AWS = AWSXRay.captureAWS(AWSBase)
 
 AWS.config.update({ region: process.env.REGION })
 

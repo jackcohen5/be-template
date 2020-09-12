@@ -81,6 +81,9 @@ provider:
           - s3:GetObject
           - s3:PutObject
         Resource: "arn:aws:s3:::${self:custom.s3.bucketName}/*"
+    tracing:
+        apiGateway: true
+        lambda: true
 
 ### FUNCTIONS
 
