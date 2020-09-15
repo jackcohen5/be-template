@@ -53,6 +53,7 @@ provider:
         S3_BUCKET_NAME: ${self:custom.s3.bucketName}
         SQS_QUEUE: ${self:custom.sqs.queueName}
         SOME_DOTENV_VAR: ${env:SOME_DOTENV_VAR}
+        AWS_XRAY_CONTEXT_MISSING: LOG_ERROR
     iamRoleStatements:
       - Effect: "Allow"
         Action:
