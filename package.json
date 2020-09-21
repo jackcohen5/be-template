@@ -43,7 +43,7 @@
     "serverless-dotenv-plugin": "^3.0.0",
     "serverless-offline": "^6.7.0",
     "serverless-webpack": "^5.3.4",
-    "webpack": "^4.44.1"
+    "webpack": "^4.44.2"
   },
   "dependencies": {
     "aws-sdk": "^2.751.0",
