@@ -37,7 +37,7 @@
     "husky": "^4.3.0",
     "jest": "^26.4.2",
     "lint-staged": "^10.4.0",
-    "nodemon": "^2.0.4",
+    "nodemon": "^2.0.5",
     "prettier": "^2.1.2",
     "serverless": "^2.6.0",
     "serverless-dotenv-plugin": "^3.0.0",
