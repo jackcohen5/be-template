@@ -7871,10 +7871,10 @@ prettier-linter-helpers@^1.0.0:
   dependencies:
     fast-diff "^1.1.2"
 
-prettier@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.1.2.tgz#3050700dae2e4c8b67c4c3f666cdb8af405e1ce5"
-  integrity sha512-16c7K+x4qVlJg9rEbXl7HEGmQyZlG4R9AgP+oHKRMsMsuk8s+ATStlf1NpDqyBI1HpVyfjLOeMhH2LvuNvV5Vg==
+prettier@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.2.0.tgz#8a03c7777883b29b37fb2c4348c66a78e980418b"
+  integrity sha512-yYerpkvseM4iKD/BXLYUkQV5aKt4tQPqaGW6EsZjzyu0r7sVZZNPJW4Y8MyKmicp6t42XUPcBVA+H6sB3gqndw==
 
 pretty-format@^26.6.2:
   version "26.6.2"
@@ -8133,13 +8133,6 @@ readdir-glob@^1.0.0:
   integrity sha512-km0DIcwQVZ1ZUhXhMWpF74/Wm5aFEd5/jDiVWF1Hkw2myPQovG8vCQ8+FQO2KXE9npQQvCnAMZhhWuUee4WcCQ==
   dependencies:
     minimatch "^3.0.4"
-
-readdirp@~3.4.0:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/readdirp/-/readdirp-3.4.0.tgz#9fdccdf9e9155805449221ac645e8303ab5b9ada"
-  integrity sha512-0xe001vZBnJEK+uKcj8qOhyAKPzIT+gStxWr3LCB0DwcXR5NZJ3IaC+yGnHCYzB/S7ov3m3EEbZI2zeNvX+hGQ==
-  dependencies:
-    picomatch "^2.2.1"
 
 readdirp@~3.5.0:
   version "3.5.0"
