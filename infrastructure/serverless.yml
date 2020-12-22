@@ -96,7 +96,7 @@ functions:
         handler: src/functions/list/index.default
         events:
             - http:
-                path: /TEMPLATE_NAME/
+                path: /api/TEMPLATE_NAME/
                 method: get
                 cors: true
                 authorizer: ${self:custom.authorizer}
@@ -105,7 +105,7 @@ functions:
         handler: src/functions/create/index.default
         events:
             - http:
-                path: /TEMPLATE_NAME/
+                path: /api/TEMPLATE_NAME/
                 method: post
                 cors: true
                 authorizer: ${self:custom.authorizer}
@@ -114,7 +114,7 @@ functions:
         handler: src/functions/put/index.default
         events:
             - http:
-                path: /TEMPLATE_NAME/{TEMPLATE_NAME_SK}/
+                path: /api/TEMPLATE_NAME/{TEMPLATE_NAME_SK}/
                 method: put
                 request:
                     parameters:
@@ -127,7 +127,7 @@ functions:
         handler: src/functions/get/index.default
         events:
             - http:
-                path: /TEMPLATE_NAME/{TEMPLATE_NAME_SK}/
+                path: /api/TEMPLATE_NAME/{TEMPLATE_NAME_SK}/
                 method: get
                 request:
                     parameters:
@@ -140,7 +140,7 @@ functions:
         handler: src/functions/delete/index.default
         events:
             - http:
-                path: /TEMPLATE_NAME/{TEMPLATE_NAME_SK}/
+                path: /api/TEMPLATE_NAME/{TEMPLATE_NAME_SK}/
                 method: delete
                 request:
                     parameters:
@@ -155,7 +155,7 @@ functions:
         iamRoleStatements:
         events:
             - http:
-                path: /TEMPLATE_NAME/upload/
+                path: /api/TEMPLATE_NAME/upload/
                 method: post
                 cors: true
                 authorizer: ${self:custom.authorizer}
@@ -164,7 +164,7 @@ functions:
         handler: src/functions/download/index.default
         events:
             - http:
-                path: /TEMPLATE_NAME/download/{fileId}/
+                path: /api/TEMPLATE_NAME/download/{fileId}/
                 method: get
                 request:
                     parameters:
