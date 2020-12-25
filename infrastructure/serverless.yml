@@ -92,6 +92,14 @@ functions:
     authorizer:
         handler: src/functions/authorizer/index.default
 
+    example:
+        handler: src/functions/example/index.default
+        events:
+            - http:
+                path: /api/example/
+                method: get
+                cors: true
+
     list:
         handler: src/functions/list/index.default
         events:
