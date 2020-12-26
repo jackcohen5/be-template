@@ -4,11 +4,26 @@ import { Roles } from 'functions/BaseView'
 export const mockUserId1 = 'user_id_1'
 
 // LAMBDA
-export const makeAuthenticatedEvent = ({
-    roles = [Roles.TEMPLATE_NAME_ROLE1],
+export const makeEvent = ({
+    authorizer = {},
+    body = {},
+    pathParameters = {},
 } = {}) => ({
-    requestContext: { authorizer: { userId: mockUserId1, roles } },
+    requestContext: { authorizer },
+    body: JSON.stringify(body),
+    pathParameters,
 })
+
+export const makeAuthenticatedEvent = ({
+    body,
+    pathParameters,
+    roles = [Roles.TEMPLATE_NAME_ROLE1],
+} = {}) =>
+    makeEvent({
+        authorizer: { userId: mockUserId1, roles },
+        body,
+        pathParameters,
+    })
 
 export const role1AuthenticatedEvent = makeAuthenticatedEvent()
 
