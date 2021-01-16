@@ -1,14 +1,11 @@
 module.exports = {
-    parser: "babel-eslint",
+    parser: 'babel-eslint',
     settings: {
         'import/resolver': {
-            "node": {
-                'paths': ['src']
-            }
-        }
+            node: {
+                paths: ['src'],
+            },
+        },
     },
-    extends: [
-        '@tophat/eslint-config/base',
-        '@tophat/eslint-config/jest',
-    ]
+    extends: ['@tophat/eslint-config/base', '@tophat/eslint-config/jest'],
 }

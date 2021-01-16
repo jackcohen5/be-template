@@ -15,8 +15,8 @@
     "flint": "yarn lint --fix",
     "start": "export NODE_ENV=development && nodemon -e js,yml -x yarn sls offline --httpPort 8080",
     "tail": "yarn sls logs --tail --function",
-    "test": "jest --passWithNoTests",
-    "test:watch": "jest --watch",
+    "test": "jest",
+    "test:watch": "yarn test --watch",
     "build": "yarn sls webpack"
   },
   "devDependencies": {

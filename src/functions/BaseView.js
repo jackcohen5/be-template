@@ -16,17 +16,10 @@ const ViewWrapper = async (f, event, ...otherParams) => {
             enhancedEvent,
             ...otherParams,
         )
-        return successResponse(
-            {
-                data,
-            },
-            statusCode,
-        )
+        return successResponse({ data }, statusCode)
     } catch (err) {
         console.error(err)
-        return errorResponse({
-            message: err.message,
-        })
+        return errorResponse({ message: err.message })
     }
 }
 
@@ -41,12 +34,7 @@ const AuthenticatedView = (f, authorizedRoles) => async (
     if (authorizedRoles.some(r => userRoles.includes(r))) {
         return await ViewWrapper(f, event, ...otherParams)
     } else {
-        return errorResponse(
-            {
-                message: 'Unauthorized',
-            },
-            403,
-        )
+        return errorResponse({ message: 'Unauthorized' }, 403)
     }
 }
 
