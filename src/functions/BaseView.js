@@ -19,7 +19,7 @@ const ViewWrapper = async (f, event, ...otherParams) => {
         return successResponse({ data }, statusCode)
     } catch (err) {
         console.error(err)
-        return errorResponse({ message: err.message })
+        return errorResponse({ message: 'Unexpected error occurred.' })
     }
 }
 
