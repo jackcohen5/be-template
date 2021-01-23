@@ -11,6 +11,7 @@ const ViewWrapper = async (f, event, ...otherParams) => {
             auth: event?.requestContext?.authorizer ?? {},
             body: JSON.parse(event?.body ?? '{}'),
             pathParameters: event?.pathParameters ?? {},
+            queryParameters: event?.queryStringParameters ?? {},
         }
         const { data, statusCode = 200 } = await f(
             enhancedEvent,
