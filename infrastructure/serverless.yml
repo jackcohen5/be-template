@@ -43,7 +43,7 @@ resources:
 
 provider:
     name: aws
-    runtime: nodejs12.x
+    runtime: nodejs14.x
     region: ca-central-1
     stage: ${self:custom.stage}
     environment:
