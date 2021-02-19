@@ -2561,7 +2561,7 @@ atomic-batcher@^1.0.2:
   resolved "https://registry.yarnpkg.com/atomic-batcher/-/atomic-batcher-1.0.2.tgz#d16901d10ccec59516c197b9ccd8930689b813b4"
   integrity sha1-0WkB0QzOxZUWwZe5zNiTBom4E7Q=
 
-aws-sdk@^2.624.0, aws-sdk@^2.845.0, aws-sdk@^2.847.0:
+aws-sdk@^2.624.0, aws-sdk@^2.846.0, aws-sdk@^2.847.0:
   version "2.847.0"
   resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.847.0.tgz#099a1087ca6ad5f9a059bf6fbcf9d4dddbd996d1"
   integrity sha512-1iWlJiMoiFJVIVPrnUZ+E3h9YqmzgLn/Etv2XsupQY4QvFHWnZHEGXsWS2bEkC9+Ovg8TTwAQIRvqYWlKQjkVg==
@@ -8685,10 +8685,10 @@ serverless-webpack@^5.3.5:
   optionalDependencies:
     ts-node ">= 8.3.0"
 
-serverless@^2.25.1:
-  version "2.25.1"
-  resolved "https://registry.yarnpkg.com/serverless/-/serverless-2.25.1.tgz#9e6b886e7cdaa7d6480095fe0ce703496b64dc2d"
-  integrity sha512-ACIwOiFfuw1k1sFWZE8xbJ61/4sc22lBFQUldzzeU5ALfZuctrR/i/eVtfgkg/3EpIFpp5fzvryfvZZ+WkVQoQ==
+serverless@^2.25.2:
+  version "2.25.2"
+  resolved "https://registry.yarnpkg.com/serverless/-/serverless-2.25.2.tgz#67833f876265725c8583d375fd3f7ab81d0804af"
+  integrity sha512-TjFQLW2Nfx3C323rIkHhuFcDyfGwe+z2TGpOYIyNWHGG8uZ1Q4AJs8jJGEhvuXzWSvXcANX8tSztloNuIaaY3Q==
   dependencies:
     "@serverless/cli" "^1.5.2"
     "@serverless/components" "^3.7.0"
@@ -8697,7 +8697,7 @@ serverless@^2.25.1:
     ajv "^6.12.6"
     ajv-keywords "^3.5.2"
     archiver "^5.2.0"
-    aws-sdk "^2.845.0"
+    aws-sdk "^2.846.0"
     bluebird "^3.7.2"
     boxen "^5.0.0"
     cachedir "^2.3.0"
