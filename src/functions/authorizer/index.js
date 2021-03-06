@@ -9,7 +9,7 @@ import {
     ROLES_CLAIM_KEY,
 } from './authorizer.constants'
 
-const getSigningKey = async kid => {
+const getSigningKey = async (kid) => {
     const client = jwksClient({
         jwksUri: `${AUTH0_DOMAIN}.well-known/jwks.json`,
     })
@@ -41,7 +41,7 @@ const generatePolicy = ({ effect, resource, roles = [], userId }) => {
     return authResponse
 }
 
-const Authorize = async event => {
+const Authorize = async (event) => {
     try {
         const splitAuthHeader = event.authorizationToken.split(' ')
         const token =

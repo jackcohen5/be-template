@@ -7,10 +7,10 @@ const generatePresignedUrl = ({ key, action }) =>
         Expires: 60,
     })
 
-export const generateDownloadUrl = key =>
+export const generateDownloadUrl = (key) =>
     generatePresignedUrl({ key, action: 'getObject' })
 
-export const generateUploadUrl = key =>
+export const generateUploadUrl = (key) =>
     generatePresignedUrl({ key, action: 'putObject' })
 
 export default {

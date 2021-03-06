@@ -1,6 +1,6 @@
 import { deleteMessage } from 'services/SQS'
 
-export const handler = async event => {
+export const handler = async (event) => {
     for (const r of event.Records) {
         const {
             body: message,
