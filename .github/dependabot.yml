@@ -1,0 +1,35 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: aws-sdk
+    versions:
+    - 2.855.0
+    - 2.874.0
+    - 2.879.0
+    - 2.889.0
+    - 2.890.0
+    - 2.891.0
+    - 2.892.0
+  - dependency-name: webpack
+    versions:
+    - 5.34.0
+  - dependency-name: "@babel/plugin-proposal-nullish-coalescing-operator"
+    versions:
+    - 7.13.8
+  - dependency-name: husky
+    versions:
+    - 5.0.9
+    - 5.1.0
+    - 5.1.1
+    - 5.1.2
+  - dependency-name: eslint-config-prettier
+    versions:
+    - 8.0.0
+  - dependency-name: "@babel/plugin-proposal-optional-chaining"
+    versions:
+    - 7.12.17
