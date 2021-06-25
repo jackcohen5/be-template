@@ -24,20 +24,21 @@ const ViewWrapper = async (f, event, ...otherParams) => {
     }
 }
 
-export const UnauthenticatedView = (f) => async (event, ...otherParams) =>
-    ViewWrapper(f, event, ...otherParams)
+export const UnauthenticatedView =
+    (f) =>
+    async (event, ...otherParams) =>
+        ViewWrapper(f, event, ...otherParams)
 
-const AuthenticatedView = (f, authorizedRoles) => async (
-    event,
-    ...otherParams
-) => {
-    const userRoles = event?.requestContext?.authorizer?.roles ?? []
-    if (authorizedRoles.some((r) => userRoles.includes(r))) {
-        return await ViewWrapper(f, event, ...otherParams)
-    } else {
-        return errorResponse({ message: 'Unauthorized' }, 403)
+const AuthenticatedView =
+    (f, authorizedRoles) =>
+    async (event, ...otherParams) => {
+        const userRoles = event?.requestContext?.authorizer?.roles ?? []
+        if (authorizedRoles.some((r) => userRoles.includes(r))) {
+            return await ViewWrapper(f, event, ...otherParams)
+        } else {
+            return errorResponse({ message: 'Unauthorized' }, 403)
+        }
     }
-}
 
 export const Role1View = (f) =>
     AuthenticatedView(f, [Roles.TEMPLATE_NAME_ROLE1])
