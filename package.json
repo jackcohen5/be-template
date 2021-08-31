@@ -39,7 +39,7 @@
     "lint-staged": "^11.0.0",
     "nodemon": "^2.0.7",
     "prettier": "^2.2.1",
-    "serverless": "^2.38.0",
+    "serverless": "^2.57.0",
     "serverless-dotenv-plugin": "^3.9.0",
     "serverless-offline": "^7.0.0",
     "serverless-webpack": "^5.4.2",
