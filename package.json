@@ -38,7 +38,7 @@
     "jest": "^27.0.5",
     "lint-staged": "^11.1.2",
     "nodemon": "^2.0.12",
-    "prettier": "^2.2.1",
+    "prettier": "^2.4.1",
     "serverless": "^2.38.0",
     "serverless-dotenv-plugin": "^3.9.0",
     "serverless-offline": "^7.0.0",
