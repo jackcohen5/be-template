@@ -1,6 +1,6 @@
 Resources:
 # S3
-    S3BucketTEMPLATE_NAME:
+    TemplateS3Bucket:
         Type: AWS::S3::Bucket
         DeletionPolicy: ${self:custom.common.deletionPolicy}
         Properties:

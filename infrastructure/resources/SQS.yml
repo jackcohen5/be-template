@@ -1,5 +1,5 @@
 Resources:
-    SQSQueueTEMPLATE_NAME:
+    TemplateSQSQueue:
         Type: "AWS::SQS::Queue"
         Properties:
-            QueueName: ${self:custom.sqs.dispatcherQueueName}
+            QueueName: ${self:custom.sqs.queueName}

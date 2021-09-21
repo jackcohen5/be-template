@@ -1,14 +1,14 @@
-service: be-TEMPLATE_NAME-service
+service: be-template-service
 
 custom:
     stage: ${opt:stage, "development"}
     dynamoDb:
-        tableName: be-TEMPLATE_NAME-${self:custom.stage}
+        tableName: be-template-${self:custom.stage}
         billingMode: PAY_PER_REQUEST
     s3:
-        bucketName: be-TEMPLATE_NAME-bucket-${self:custom.stage}
+        bucketName: be-template-bucket-${self:custom.stage}
     sqs:
-        queueName: be-TEMPLATE_NAME-${self:custom.stage}
+        queueName: be-template-${self:custom.stage}
     common:
         deletionPolicies:
             development: Delete
@@ -75,7 +75,7 @@ provider:
           - sqs:SendMessage
         Resource:
           - Fn::GetAtt:
-            - SQSQueueTEMPLATE_NAME
+            - TemplateSQSQueue
             - Arn
       - Effect: "Allow"
         Action:
@@ -85,6 +85,13 @@ provider:
     tracing:
         apiGateway: true
         lambda: true
+    eventBridge:
+        useCloudFormation: true
+    lambdaHashingVersion: 20201221
+
+configValidationMode: error
+variablesResolutionMode: 20210326
+useDotenv: true
 
 ### FUNCTIONS
 
@@ -159,8 +166,6 @@ functions:
 
     upload:
         handler: src/functions/upload/index.default
-        iamRoleStatementsName: TEMPLATE_NAME-${self:custom.stage}-upload-role
-        iamRoleStatements:
         events:
             - http:
                 path: /api/TEMPLATE_NAME/upload/
@@ -194,5 +199,5 @@ functions:
             - sqs:
                 arn:
                     Fn::GetAtt:
-                        - SQSQueueTEMPLATE_NAME
+                        - TemplateSQSQueue
                         - Arn

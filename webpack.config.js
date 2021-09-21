@@ -28,10 +28,5 @@ module.exports = {
         libraryTarget: 'commonjs',
         path: path.resolve(__dirname, '.webpack'),
     },
-    plugins: [
-        new webpack.ProgressPlugin(),
-        new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-        }),
-    ],
+    plugins: [new webpack.ProgressPlugin()],
 }

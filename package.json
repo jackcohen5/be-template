@@ -4,7 +4,6 @@
   "main": "src/handler.js",
   "license": "MIT",
   "scripts": {
-    "sls": "sls --config ./infrastructure/serverless.yml",
     "deploy:env": "yarn sls deploy --stage $NODE_ENV",
     "deploy": "export NODE_ENV=development && yarn deploy:env",
     "deploy:production": "export NODE_ENV=production && yarn deploy:env",

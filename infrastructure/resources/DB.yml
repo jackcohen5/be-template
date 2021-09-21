@@ -1,6 +1,6 @@
 Resources:
 # DynamoDB
-    DynamoDBTableTEMPLATE_NAME:
+    TemplateDynamoDBTable:
         Type: AWS::DynamoDB::Table
         DeletionPolicy: ${self:custom.common.deletionPolicy}
         Properties:
