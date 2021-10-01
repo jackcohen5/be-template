@@ -29,7 +29,7 @@ package:
 
 plugins:
     - serverless-dotenv-plugin
-    - serverless-webpack
+    - serverless-plugin-typescript
     - serverless-offline
 
 ### RESOURCES

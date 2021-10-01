@@ -1,4 +1,4 @@
-import { mockItems } from '../mocks'
+import { mockItems } from 'mocks'
 
 jest.mock('services/DynamoDB', () => ({
     list: () => mockItems,
