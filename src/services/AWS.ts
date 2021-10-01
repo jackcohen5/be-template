@@ -1,7 +1,10 @@
-import AWSBase from 'aws-sdk'
-import AWSXRay from 'aws-xray-sdk-core'
+import * as https from 'https'
+
+import * as AWSBase from 'aws-sdk'
+import * as AWSXRay from 'aws-xray-sdk'
 
 const AWS = AWSXRay.captureAWS(AWSBase)
+AWSXRay.captureHTTPsGlobal(https)
 
 AWS.config.update({ region: process.env.REGION })
 

@@ -1,6 +1,17 @@
+import type { DocumentClient } from 'aws-sdk/lib/dynamodb/document_client'
+
 import { DynamoDB } from './AWS'
 
-export const list = async ({ pk, sk }) => {
+type BaseItem = {
+    pk: string
+    sk: string
+    data?: { [key: string]: string }
+}
+
+export const list = async ({
+    pk,
+    sk,
+}: BaseItem): Promise<DocumentClient.ItemList> => {
     let KeyConditionExpression = 'pk = :pk'
     const ExpressionAttributeValues = { ':pk': pk }
     if (sk) {
@@ -17,7 +28,10 @@ export const list = async ({ pk, sk }) => {
     return result.Items
 }
 
-export const get = async ({ pk, sk }) => {
+export const get = async ({
+    pk,
+    sk,
+}: BaseItem): Promise<DocumentClient.AttributeMap> => {
     const params = {
         TableName: process.env.DYNAMODB_TABLE,
         Key: {
@@ -30,7 +44,7 @@ export const get = async ({ pk, sk }) => {
     return result.Item
 }
 
-export const put = async ({ pk, sk, data }) => {
+export const put = async ({ pk, sk, data }: BaseItem): Promise<BaseItem> => {
     const params = {
         TableName: process.env.DYNAMODB_TABLE,
         Item: {
@@ -44,7 +58,7 @@ export const put = async ({ pk, sk, data }) => {
     return params.Item
 }
 
-export const deleteItem = async ({ pk, sk }) => {
+export const deleteItem = async ({ pk, sk }: BaseItem): Promise<BaseItem> => {
     const params = {
         TableName: process.env.DYNAMODB_TABLE,
         Key: {
@@ -54,5 +68,5 @@ export const deleteItem = async ({ pk, sk }) => {
     }
 
     await DynamoDB.delete(params).promise()
-    return params.Item
+    return params.Key
 }
