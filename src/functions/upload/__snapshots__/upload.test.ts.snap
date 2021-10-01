@@ -2,7 +2,7 @@
 
 exports[`upload executes as expected 1`] = `
 Object {
-  "body": "{\\"data\\":\\"upload-url\\"}",
+  "body": "{\\"url\\":\\"upload-url\\"}",
   "headers": Object {
     "Access-Control-Allow-Origin": "*",
   },

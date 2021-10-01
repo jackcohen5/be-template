@@ -59,15 +59,17 @@ export const makeEvent = <TAuthorizerContext>({
     pathParameters,
 })
 
+type AuthenticatedEventParams = {
+    body?: string
+    pathParameters?: APIGatewayProxyEventPathParameters
+    roles?: Roles[]
+}
+
 export const makeAuthenticatedEvent = ({
     body,
     pathParameters,
     roles = [Roles.TEMPLATE_NAME_ROLE1],
-}: {
-    body?: string
-    pathParameters?: APIGatewayProxyEventPathParameters
-    roles?: Roles[]
-} = {}): APIGatewayProxyEvent =>
+}: AuthenticatedEventParams = {}): APIGatewayProxyEvent =>
     makeEvent({
         authorizer: { userId: mockUserId1, roles },
         body,
@@ -75,6 +77,9 @@ export const makeAuthenticatedEvent = ({
     })
 
 export const role1AuthenticatedEvent = makeAuthenticatedEvent()
+export const role2AuthenticatedEvent = makeAuthenticatedEvent({
+    roles: [Roles.TEMPLATE_NAME_ROLE2],
+})
 
 // ITEM
 export const mockItem1 = {
