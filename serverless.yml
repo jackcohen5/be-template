@@ -18,7 +18,9 @@ custom:
         name: authorizer
         identitySource: method.request.header.Authorization
         type: token
-
+    webpack:
+        webpackConfig: ./webpack.config.js
+        packager: 'yarn'
 package:
   individually: true
 
@@ -26,7 +28,7 @@ package:
 
 plugins:
     - serverless-dotenv-plugin
-    - serverless-plugin-typescript
+    - serverless-webpack
     - serverless-offline
 
 ### RESOURCES

@@ -12,11 +12,11 @@
     "cleanup": "export NODE_ENV=development && yarn cleanup:env",
     "lint": "eslint src --ext ts --no-ignore",
     "flint": "yarn lint --fix",
-    "start": "export NODE_ENV=development && nodemon -e js,yml -x yarn sls offline --httpPort 8080",
+    "start": "export NODE_ENV=development && nodemon -e ts,yml,json -x yarn sls offline --httpPort 8080",
     "tail": "yarn sls logs --tail --function",
     "test": "jest",
     "test:watch": "yarn test --watch",
-    "build": "yarn sls package"
+    "build": "yarn sls webpack"
   },
   "devDependencies": {
     "@babel/core": "^7.14.0",
@@ -46,9 +46,11 @@
     "serverless": "^2.60.0",
     "serverless-dotenv-plugin": "^3.9.0",
     "serverless-offline": "^8.2.0",
-    "serverless-plugin-typescript": "^2.1.0",
+    "serverless-webpack": "^5.5.4",
     "ts-jest": "^27.0.5",
-    "typescript": "^4.4.3"
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.4.3",
+    "webpack": "^5.56.0"
   },
   "dependencies": {
     "aws-sdk": "^2.997.0",

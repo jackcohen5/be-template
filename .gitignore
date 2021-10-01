@@ -1,6 +1,9 @@
 # Dependency directories
 node_modules/
 
+# Webpack directory
+.webpack
+
 # Build directory
 .build
 
