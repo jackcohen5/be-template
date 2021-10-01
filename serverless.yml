@@ -18,9 +18,6 @@ custom:
         name: authorizer
         identitySource: method.request.header.Authorization
         type: token
-    webpack:
-        webpackConfig: ./webpack.config.js
-        packager: 'yarn'
 
 package:
   individually: true

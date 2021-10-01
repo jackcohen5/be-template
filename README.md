@@ -3,7 +3,7 @@
 [![CircleCI](https://circleci.com/gh/jackcohen5/be-template.svg?style=svg)](https://circleci.com/gh/jackcohen5/be-template)
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=jackcohen5/be-template)](https://dependabot.com)
 
-This template service gives you the latest in modern JavaScript (ES6 via Webpack + Babel, testing with Jest, linting with ESLint, and formatting with Prettier), the ease and power of Serverless, and bootstrapped AWS (DynamoDB, S3 and SQS) infrastructure.
+This template service gives you the latest in modern JavaScript (Typescript, testing with Jest, linting with ESLint, and formatting with Prettier), the ease and power of Serverless, and bootstrapped AWS (DynamoDB, S3 and SQS) infrastructure.
 
 Once installed, you can create and deploy functions with the latest ES6 features in minutes, with linting and formatting baked in.
 

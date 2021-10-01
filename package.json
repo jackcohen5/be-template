@@ -16,7 +16,7 @@
     "tail": "yarn sls logs --tail --function",
     "test": "jest",
     "test:watch": "yarn test --watch",
-    "build": "yarn sls webpack"
+    "build": "yarn sls package"
   },
   "devDependencies": {
     "@babel/core": "^7.14.0",
