@@ -1,5 +1,9 @@
+import {
+    APIGatewayAuthorizerResult,
+    APIGatewayTokenAuthorizerHandler,
+} from 'aws-lambda'
 import jwt from 'jsonwebtoken'
-import jwksClient from 'jwks-rsa'
+import * as jwksClient from 'jwks-rsa'
 
 import {
     AUTH0_AUDIENCE,
@@ -7,17 +11,18 @@ import {
     ROLES_CLAIM_KEY,
 } from './authorizer.constants'
 
-const generatePolicy = ({ effect, resource, roles = [], userId }) => {
-    const authResponse = {
-        principalId: userId,
+const generatePolicy = ({
+    effect,
+    resource,
+    roles = [],
+    userId,
+}): APIGatewayAuthorizerResult => {
+    return {
         context: {
             userId,
-            roles,
+            roles: JSON.stringify(roles),
         },
-    }
-
-    if (effect && resource) {
-        authResponse.policyDocument = {
+        policyDocument: {
             Version: '2012-10-17',
             Statement: [
                 {
@@ -26,10 +31,9 @@ const generatePolicy = ({ effect, resource, roles = [], userId }) => {
                     Resource: resource,
                 },
             ],
-        }
+        },
+        principalId: userId,
     }
-
-    return authResponse
 }
 
 const getPublicKey = async (kid) => {
@@ -40,7 +44,7 @@ const getPublicKey = async (kid) => {
     return signingKey.getPublicKey()
 }
 
-const Authorize = async (event) => {
+const Authorize: APIGatewayTokenAuthorizerHandler = async (event) => {
     try {
         const splitAuthHeader = event.authorizationToken.split(' ')
         const token =

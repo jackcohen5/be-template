@@ -1,6 +1,8 @@
+import { SQSHandler } from 'aws-lambda'
+
 import { deleteMessage } from 'services/SQS'
 
-export const handler = async (event) => {
+export const handler: SQSHandler = async (event) => {
     for (const r of event.Records) {
         const {
             body: message,

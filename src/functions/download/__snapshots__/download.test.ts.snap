@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`delete executes as expected 1`] = `
+exports[`download executes as expected if role 2 1`] = `
 Object {
-  "body": "{\\"data\\":{\\"itemId\\":\\"item_id_1\\",\\"userId\\":\\"user_id_1\\"}}",
+  "body": "{\\"url\\":\\"download-url\\"}",
   "headers": Object {
     "Access-Control-Allow-Origin": "*",
   },
