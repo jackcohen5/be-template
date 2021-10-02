@@ -4,10 +4,10 @@ import { errorResponse, successResponse } from 'services/Lambda'
 import { Roles } from 'functions/authorizer/authorizer.constants'
 
 export interface EnhancedEvent {
-    auth: { [key: string]: unknown } // TODO
-    body: { [key: string]: unknown }
-    pathParameters: { [key: string]: unknown }
-    queryParameters: { [key: string]: unknown }
+    auth: { [key: string]: string }
+    body: { [key: string]: string }
+    pathParameters: { [key: string]: string }
+    queryParameters: { [key: string]: string }
 }
 
 interface HandlerResponse<T> {

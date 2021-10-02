@@ -2,21 +2,24 @@ import type { DocumentClient } from 'aws-sdk/lib/dynamodb/document_client'
 
 import { DynamoDB } from './AWS'
 
-type BaseItem = {
+export interface BasePartition {
     pk: string
+    sk?: string
+}
+
+export interface BaseItem extends BasePartition {
     sk: string
     data?: { [key: string]: string }
 }
 
-export const list = async ({
-    pk,
-    sk,
-}: BaseItem): Promise<DocumentClient.ItemList> => {
+export const list = async (
+    partition: BasePartition,
+): Promise<DocumentClient.ItemList> => {
     let KeyConditionExpression = 'pk = :pk'
-    const ExpressionAttributeValues = { ':pk': pk }
-    if (sk) {
+    const ExpressionAttributeValues = { ':pk': partition.pk }
+    if (partition.sk) {
         KeyConditionExpression += ' and begins_with(sk, :sk)'
-        ExpressionAttributeValues[':sk'] = sk
+        ExpressionAttributeValues[':sk'] = partition.sk
     }
     const params = {
         TableName: process.env.DYNAMODB_TABLE,
