@@ -1,3 +1,4 @@
+name: BE Template CI
 on: push
 
 jobs:
