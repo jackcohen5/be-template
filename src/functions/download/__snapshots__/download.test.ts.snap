@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`download executes as expected if role 2 1`] = `
+Object {
+  "body": "{\\"url\\":\\"download-url\\"}",
+  "headers": Object {
+    "Access-Control-Allow-Origin": "*",
+  },
+  "statusCode": 200,
+}
+`;

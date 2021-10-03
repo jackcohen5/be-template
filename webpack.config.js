@@ -1,5 +1,5 @@
-// eslint-disable-next-line import/order
 const path = require('path')
+
 const slsw = require('serverless-webpack')
 const webpack = require('webpack')
 
@@ -10,22 +10,24 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.js?$/,
+                test: /\.ts?$/,
                 include: __dirname,
                 exclude: /node_modules/,
                 use: {
-                    loader: 'babel-loader',
+                    loader: 'ts-loader',
                 },
             },
         ],
     },
     resolve: {
-        extensions: ['.js'],
+        extensions: ['.ts', '.js'],
         modules: [path.resolve(__dirname, 'src'), 'node_modules'],
     },
     output: {
         filename: '[name].js',
-        libraryTarget: 'commonjs',
+        library: {
+            type: 'commonjs',
+        },
         path: path.resolve(__dirname, '.webpack'),
     },
     plugins: [new webpack.ProgressPlugin()],

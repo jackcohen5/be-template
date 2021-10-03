@@ -1,10 +1,9 @@
 module.exports = {
     roots: ['<rootDir>/src'],
-    testRegex: '((\\.|/*.)(test))\\.js?$',
-    transform: {
-        '^.+\\.js$': 'babel-jest',
-    },
+    testRegex: '((\\.|/*.)(test))\\.ts$',
     modulePaths: ['<rootDir>/src'],
-    moduleFileExtensions: ['js', 'json'],
-    setupFilesAfterEnv: ['<rootDir>/config/setupJest.js'],
+    setupFilesAfterEnv: ['<rootDir>/src/config/setupJest.ts'],
+    transform: {
+        '^.+\\.ts?$': 'ts-jest',
+    },
 }
