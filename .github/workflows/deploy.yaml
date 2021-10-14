@@ -1,0 +1,42 @@
+name: BE Template CD
+on:
+  workflow_run:
+    workflows: ["BE Template CI"]
+    branches: [master]
+    types: [completed]
+
+jobs:
+  deploy_staging:
+    name: Deploy functions to the staging environment
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '14.15.4'
+        cache: 'yarn'
+    - name: Create .env file
+      run: |
+        touch .env
+        echo SOME_DOTENV_VAR="some-dotenv-var-staging" >> .env
+        cat .env
+    - run: yarn install
+    - run: yarn deploy:staging
+  deploy_production:
+    name: Deploy functions to the production environment
+    runs-on: ubuntu-latest
+    needs: deploy_staging
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '14.15.4'
+        cache: 'yarn'
+    - name: Create .env file
+      run: |
+        touch .env
+        echo SOME_DOTENV_VAR="some-dotenv-var-prod" >> .env
+        cat .env
+    - run: yarn install
+    - run: yarn deploy:production
