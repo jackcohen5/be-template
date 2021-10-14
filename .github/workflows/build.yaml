@@ -6,8 +6,10 @@ jobs:
     name: Run linters
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup NodeJS
+      uses: actions/setup-node@v2
       with:
         node-version: '14.15.4'
         cache: 'yarn'
@@ -17,8 +19,10 @@ jobs:
     name: Run tests
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup NodeJS
+      uses: actions/setup-node@v2
       with:
         node-version: '14.15.4'
         cache: 'yarn'
@@ -28,8 +32,10 @@ jobs:
     name: Package functions
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup NodeJS
+      uses: actions/setup-node@v2
       with:
         node-version: '14.15.4'
         cache: 'yarn'

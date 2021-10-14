@@ -11,11 +11,18 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup NodeJS
+      uses: actions/setup-node@v2
       with:
         node-version: '14.15.4'
         cache: 'yarn'
+    - name: Configure AWS credentials from staging account
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: arn:aws:iam::111111111111:role/be-template-deploy-role-staging
+        aws-region: us-east-1
     - name: Create .env file
       run: |
         touch .env
@@ -28,11 +35,18 @@ jobs:
     runs-on: ubuntu-latest
     needs: deploy_staging
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup NodeJS
+      uses: actions/setup-node@v2
       with:
         node-version: '14.15.4'
         cache: 'yarn'
+    - name: Configure AWS credentials from production account
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: arn:aws:iam::222222222222:role/be-template-deploy-role-production
+        aws-region: us-east-1
     - name: Create .env file
       run: |
         touch .env
