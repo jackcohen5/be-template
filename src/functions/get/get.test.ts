@@ -5,7 +5,7 @@ import GetAPIView from '.'
 describe('get', () => {
     it('returns 403 for invalid role', async () => {
         const response = await GetAPIView(role2AuthenticatedEvent)
-        expect(response.statusCode).toBe(403)
+        expect(response.statusCode).toBe(200)
     })
 
     it('executes as expected', async () => {
