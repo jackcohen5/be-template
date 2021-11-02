@@ -61,3 +61,10 @@ yarn cleanup
 ```
 
 `yarn cleanup` will remove the `development` environment.
+
+---
+**NOTE**
+
+You will need to create a .env file or the above command will fail. When you are ready to use this template, follow the steps in the [ejection documentation](docs/EJECTION.md).
+
+---

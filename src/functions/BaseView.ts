@@ -1,35 +1,49 @@
-import type { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
+import type {
+    APIGatewayProxyEvent,
+    APIGatewayProxyEventPathParameters,
+    APIGatewayProxyEventQueryStringParameters,
+    APIGatewayProxyResult,
+} from 'aws-lambda'
 
 import { errorResponse, successResponse } from 'services/Lambda'
-import { Roles } from 'functions/authorizer/authorizer.constants'
+import { Role } from 'functions/authorizer/constants'
 
-export interface EnhancedEvent {
-    auth: { [key: string]: string }
-    body: { [key: string]: string }
-    pathParameters: { [key: string]: string }
-    queryParameters: { [key: string]: string }
+const extractRoleFromEvent = (
+    event: APIGatewayProxyEvent,
+): Role | undefined => {
+    return event.requestContext.authorizer?.jwt?.claims?.claims?.role
 }
 
-interface HandlerResponse<T> {
-    data: T
+interface EnhancedEvent<RequestBody> {
+    auth: Record<string, unknown>
+    body: RequestBody
+    pathParameters: APIGatewayProxyEventPathParameters
+    queryParameters: APIGatewayProxyEventQueryStringParameters
+}
+
+interface HandlerResponse<ResponsePayload> {
+    data: ResponsePayload
     statusCode?: number
 }
 
-export type FunctionHandler<T> = (
-    event: EnhancedEvent,
-) => Promise<HandlerResponse<T>>
+export type FunctionHandler<
+    ResponsePayload,
+    RequestBody = Record<string, unknown>,
+> = (
+    event: EnhancedEvent<RequestBody>,
+) => Promise<HandlerResponse<ResponsePayload>>
 
 type View = (
     event: APIGatewayProxyEvent,
-    authorizedRoles?: Roles[],
+    authorizedRoles?: Role[],
 ) => Promise<APIGatewayProxyResult>
 
-const ViewWrapper = async <T>(
-    f: FunctionHandler<T>,
+const ViewWrapper = async <RequestBody, ResponsePayload>(
+    f: FunctionHandler<ResponsePayload, RequestBody>,
     event: APIGatewayProxyEvent,
 ): Promise<APIGatewayProxyResult> => {
     try {
-        const enhancedEvent: EnhancedEvent = {
+        const enhancedEvent: EnhancedEvent<RequestBody> = {
             auth: event?.requestContext?.authorizer ?? {},
             body: JSON.parse(event?.body ?? '{}'),
             pathParameters: event?.pathParameters ?? {},
@@ -44,24 +58,41 @@ const ViewWrapper = async <T>(
 }
 
 export const UnauthenticatedView =
-    <T>(f: FunctionHandler<T>): View =>
+    <RequestBody, ResponsePayload>(
+        f: FunctionHandler<RequestBody, ResponsePayload>,
+    ): View =>
     (event: APIGatewayProxyEvent) =>
         ViewWrapper(f, event)
 
-const AuthenticatedView =
-    <T>(f: FunctionHandler<T>, authorizedRoles: Roles[] = []): View =>
+export const AnonymousView =
+    <RequestBody, ResponsePayload>(
+        f: FunctionHandler<RequestBody, ResponsePayload>,
+    ): View =>
     async (event: APIGatewayProxyEvent) => {
-        const userRoles: string[] =
-            event?.requestContext?.authorizer?.roles ?? []
-        if (authorizedRoles.some((r) => userRoles.includes(r))) {
+        if (extractRoleFromEvent(event)) {
+            return errorResponse({ message: 'Unauthorized' }, 403)
+        }
+
+        return await ViewWrapper(f, event)
+    }
+
+const AuthenticatedView =
+    <RequestBody, ResponsePayload>(
+        f: FunctionHandler<RequestBody, ResponsePayload>,
+        authorizedRoles: Role[] = [],
+    ): View =>
+    async (event: APIGatewayProxyEvent) => {
+        if (authorizedRoles.includes(extractRoleFromEvent(event))) {
             return await ViewWrapper(f, event)
         } else {
             return errorResponse({ message: 'Unauthorized' }, 403)
         }
     }
 
-export const Role1View = <T>(f: FunctionHandler<T>): View =>
-    AuthenticatedView(f, [Roles.TEMPLATE_NAME_ROLE1])
+export const Role1View = <RequestBody, ResponsePayload>(
+    f: FunctionHandler<RequestBody, ResponsePayload>,
+): View => AuthenticatedView(f, [Role.ROLE_1])
 
-export const Role2View = <T>(f: FunctionHandler<T>): View =>
-    AuthenticatedView(f, [Roles.TEMPLATE_NAME_ROLE2])
+export const Role2View = <RequestBody, ResponsePayload>(
+    f: FunctionHandler<RequestBody, ResponsePayload>,
+): View => AuthenticatedView(f, [Role.ROLE_2])

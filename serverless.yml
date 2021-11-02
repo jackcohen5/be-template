@@ -44,7 +44,7 @@ resources:
 provider:
     name: aws
     runtime: nodejs14.x
-    region: ca-central-1
+    region: us-east-1
     stage: ${self:custom.stage}
     environment:
         AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
@@ -82,12 +82,25 @@ provider:
           - s3:GetObject
           - s3:PutObject
         Resource: "arn:aws:s3:::${self:custom.s3.bucketName}/*"
+      - Effect: "Allow"
+        Action:
+          - ssm:GetParameter
+        Resource: "arn:aws:ssm:::parameter/be-template/*"
     tracing:
         apiGateway: true
         lambda: true
     eventBridge:
         useCloudFormation: true
     lambdaHashingVersion: 20201221
+    httpApi:
+        metrics: true
+        authorizers:
+            jwtAuthorizer:
+                type: jwt
+                identitySource: $request.header.Authorization
+                issuerUrl: be-template-service@fe-template.iam.gserviceaccount.com
+                audience:
+                    - https://identitytoolkit.googleapis.com/google.identity.identitytoolkit.v1.IdentityToolkit
 
 configValidationMode: error
 variablesResolutionMode: 20210326
@@ -96,95 +109,85 @@ useDotenv: true
 ### FUNCTIONS
 
 functions:
-    authorizer:
-        handler: src/functions/authorizer/index.default
-
     example:
         handler: src/functions/example/index.default
         events:
-            - http:
+            - httpApi:
                 path: /api/example/
                 method: get
-                cors: true
+
+    signUp:
+        handler: src/functions/signUp/index.default
+        environment:
+            FIREBASE_SERVICE_ACCOUNT_KEY_PATH: /be-template/firebase/service-account-key
+        events:
+            - httpApi:
+                path: /api/signUp/
+                method: post
 
     list:
         handler: src/functions/list/index.default
         events:
-            - http:
+            - httpApi:
                 path: /api/TEMPLATE_NAME/
                 method: get
-                cors: true
-                authorizer: ${self:custom.authorizer}
+                authorizer:
+                    name: jwtAuthorizer
+
 
     create:
         handler: src/functions/create/index.default
         events:
-            - http:
+            - httpApi:
                 path: /api/TEMPLATE_NAME/
                 method: post
-                cors: true
-                authorizer: ${self:custom.authorizer}
+                authorizer:
+                    name: jwtAuthorizer
 
     put:
         handler: src/functions/put/index.default
         events:
-            - http:
+            - httpApi:
                 path: /api/TEMPLATE_NAME/{TEMPLATE_NAME_SK}/
                 method: put
-                request:
-                    parameters:
-                        paths:
-                            TEMPLATE_NAME_SK: true
-                cors: true
-                authorizer: ${self:custom.authorizer}
+                authorizer:
+                    name: jwtAuthorizer
 
     get:
         handler: src/functions/get/index.default
         events:
-            - http:
+            - httpApi:
                 path: /api/TEMPLATE_NAME/{TEMPLATE_NAME_SK}/
                 method: get
-                request:
-                    parameters:
-                        paths:
-                            TEMPLATE_NAME_SK: true
-                cors: true
-                authorizer: ${self:custom.authorizer}
+                authorizer:
+                    name: jwtAuthorizer
 
     delete:
         handler: src/functions/delete/index.default
         events:
-            - http:
+            - httpApi:
                 path: /api/TEMPLATE_NAME/{TEMPLATE_NAME_SK}/
                 method: delete
-                request:
-                    parameters:
-                        paths:
-                            TEMPLATE_NAME_SK: true
-                cors: true
-                authorizer: ${self:custom.authorizer}
+                authorizer:
+                    name: jwtAuthorizer
 
     upload:
         handler: src/functions/upload/index.default
         events:
-            - http:
+            - httpApi:
                 path: /api/TEMPLATE_NAME/upload/
                 method: post
-                cors: true
-                authorizer: ${self:custom.authorizer}
+                authorizer:
+                    name: jwtAuthorizer
 
     download:
         handler: src/functions/download/index.default
         events:
-            - http:
+            - httpApi:
                 path: /api/TEMPLATE_NAME/download/{fileId}/
                 method: get
-                request:
-                    parameters:
-                        paths:
-                            fileId: true
-                cors: true
-                authorizer: ${self:custom.authorizer}
+                authorizer:
+                    name: jwtAuthorizer
 
     cron:
         handler: src/functions/cron/index.handler

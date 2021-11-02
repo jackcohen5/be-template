@@ -9,7 +9,7 @@ export interface BasePartition {
 
 export interface BaseItem extends BasePartition {
     sk: string
-    data?: { [key: string]: string }
+    data?: Record<string, unknown>
 }
 
 export const list = async (
