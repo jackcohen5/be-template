@@ -12,7 +12,7 @@
     "cleanup": "export NODE_ENV=development && yarn cleanup:env",
     "lint": "eslint src --ext ts --no-ignore",
     "flint": "yarn lint --fix",
-    "start": "export NODE_ENV=development && nodemon -e ts,yml,json -x yarn sls offline --httpPort 8080",
+    "start": "export NODE_ENV=development && nodemon -e ts,yml,json -x yarn sls offline --httpPort 8080 --ignoreJWTSignature",
     "tail": "yarn sls logs --tail --function",
     "test": "jest",
     "test:watch": "yarn test --watch",
@@ -27,6 +27,7 @@
     "@tophat/eslint-config": "^0.12.0",
     "@types/aws-lambda": "^8.10.83",
     "@types/jest": "^27.0.2",
+    "@types/uuid": "^8.3.1",
     "@typescript-eslint/eslint-plugin": "^4.32.0",
     "@typescript-eslint/parser": "^4.32.0",
     "babel-eslint": "^10.1.0",
@@ -42,7 +43,7 @@
     "lint-staged": "^11.1.2",
     "nodemon": "^2.0.13",
     "prettier": "^2.4.1",
-    "serverless": "^2.60.0",
+    "serverless": "^2.64.1",
     "serverless-dotenv-plugin": "^3.9.0",
     "serverless-offline": "^8.2.0",
     "serverless-webpack": "^5.5.4",
@@ -54,8 +55,7 @@
   "dependencies": {
     "aws-sdk": "^2.997.0",
     "aws-xray-sdk": "^3.3.1",
-    "jsonwebtoken": "^8.5.1",
-    "jwks-rsa": "^2.0.3",
+    "firebase-admin": "^10.0.0",
     "uuid": "^8.3.0"
   },
   "husky": {

@@ -6,7 +6,7 @@ import { getRandomInt } from './utils'
 
 interface ExamplePayload {
     someNumber: number
-    someUuid: uuid
+    someUuid: string
 }
 
 const ExampleAPIView: FunctionHandler<ExamplePayload> = async () => ({

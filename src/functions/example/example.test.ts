@@ -9,13 +9,15 @@ jest.mock('./utils', () => ({
     getRandomInt: () => 11,
 }))
 
+const mockedUuid = uuid as jest.Mock
+
 describe('Example View', () => {
     beforeEach(() => {
         jest.restoreAllMocks()
     })
 
     it('Returns UUID and random number as expected', async () => {
-        uuid.mockReturnValue('e39a5aff-47a7-449b-8c81-3ddc7bb9e87e')
+        mockedUuid.mockReturnValue('e39a5aff-47a7-449b-8c81-3ddc7bb9e87e')
 
         const unauthenticatedEvent = makeEvent()
         const response = await ExampleView(unauthenticatedEvent)

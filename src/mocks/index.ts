@@ -5,7 +5,7 @@ import {
     APIGatewayProxyEventPathParameters,
 } from 'aws-lambda'
 
-import { Roles } from 'functions/authorizer/authorizer.constants'
+import { Role } from 'functions/authorizer/constants'
 
 // COMMON
 export const mockUserId1 = 'user_id_1'
@@ -62,23 +62,23 @@ export const makeEvent = <TAuthorizerContext>({
 type AuthenticatedEventParams = {
     body?: string
     pathParameters?: APIGatewayProxyEventPathParameters
-    roles?: Roles[]
+    role?: Role
 }
 
 export const makeAuthenticatedEvent = ({
     body,
     pathParameters,
-    roles = [Roles.TEMPLATE_NAME_ROLE1],
+    role = Role.ROLE_1,
 }: AuthenticatedEventParams = {}): APIGatewayProxyEvent =>
     makeEvent({
-        authorizer: { userId: mockUserId1, roles },
+        authorizer: { jwt: { claims: { claims: { role } } } },
         body,
         pathParameters,
     })
 
 export const role1AuthenticatedEvent = makeAuthenticatedEvent()
 export const role2AuthenticatedEvent = makeAuthenticatedEvent({
-    roles: [Roles.TEMPLATE_NAME_ROLE2],
+    role: Role.ROLE_2,
 })
 
 // ITEM
