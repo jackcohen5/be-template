@@ -18,6 +18,12 @@
     "test:watch": "yarn test --watch",
     "build": "yarn sls webpack"
   },
+  "lint-staged": {
+    "src/**/*.(js|ts)": [
+      "yarn lint",
+      "yarn test --passWithNoTests"
+    ]
+  },
   "devDependencies": {
     "@babel/core": "^7.14.0",
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.13.0",
@@ -57,16 +63,5 @@
     "aws-xray-sdk": "^3.3.1",
     "firebase-admin": "^10.0.0",
     "uuid": "^8.3.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "src/**/*.js": [
-      "yarn lint",
-      "yarn test"
-    ]
   }
 }
