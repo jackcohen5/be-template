@@ -1988,10 +1988,10 @@
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-2.0.0.tgz#f544a148d3ab35801c1f633a7441fd87c2e484bf"
   integrity sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==
 
-"@tophat/eslint-config@^0.12.0":
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/@tophat/eslint-config/-/eslint-config-0.12.0.tgz#658d3c24c40725ec56807d98efbc6aee93d86809"
-  integrity sha512-c0p2k1wK7dBr21HCGH5ebYNEoRZ1GfbY5r2ij2BGxEOWes/j8ns224qaaELzQQiNF8FuA/VyfZ1vk+Ng38EvDQ==
+"@tophat/eslint-config@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@tophat/eslint-config/-/eslint-config-1.0.0.tgz#96743cb25c9523a486348ded0acb5818fea0667e"
+  integrity sha512-kfvPagOI+IhScER/MXanWcvnexmQoo3jvelMEycj16dV54PtmspahQH1BDwxvsGl1PJkBj/mflRnMgYVv9qWgA==
   dependencies:
     "@tophat/eslint-import-resolver-require" "^0.1.3"
     eslint-import-resolver-node "^0.3.6"
