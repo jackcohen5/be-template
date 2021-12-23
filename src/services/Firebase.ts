@@ -1,14 +1,19 @@
 import * as admin from 'firebase-admin'
-import type { ServiceAccount } from 'firebase-admin'
+import type { ServiceAccount, auth, firestore } from 'firebase-admin'
 import type { UserRecord } from 'firebase-admin/auth'
 
 import { Role } from 'functions/authorizer/constants'
 import { SSM } from 'services/AWS'
 
-let FirebaseAuthInstance
+type FirebaseSingleton = {
+    Auth: auth.Auth
+    Firestore: firestore.Firestore
+}
 
-const initializeFirebaseAuthIfNeeded = async () => {
-    if (FirebaseAuthInstance) return FirebaseAuthInstance
+let FirebaseInstance: FirebaseSingleton
+
+const initializeFirebaseIfNeeded = async () => {
+    if (FirebaseInstance) return FirebaseInstance
 
     const serviceAccountKey = await SSM.getParameter({
         Name: process.env.FIREBASE_SERVICE_ACCOUNT_KEY_PATH,
@@ -16,12 +21,14 @@ const initializeFirebaseAuthIfNeeded = async () => {
     })
         .promise()
         .then((r) => JSON.parse(r.Parameter.Value))
+
     admin.initializeApp({
         credential: admin.credential.cert(serviceAccountKey as ServiceAccount),
     })
 
-    FirebaseAuthInstance = admin.auth()
-    return FirebaseAuthInstance
+    FirebaseInstance = { Auth: admin.auth(), Firestore: admin.firestore() }
+
+    return FirebaseInstance
 }
 
 export const createUser = async ({
@@ -37,15 +44,23 @@ export const createUser = async ({
     firstName: string
     lastName: string
 }): Promise<UserRecord> => {
-    const FirebaseAuth = await initializeFirebaseAuthIfNeeded()
-    return FirebaseAuth.createUser({
-        uid: userId,
-        email,
-        password,
-        emailVerified: false,
-        displayName: `${firstName} ${lastName}`,
-        disabled: false,
-    })
+    const { Auth, Firestore } = await initializeFirebaseIfNeeded()
+    return Firestore.doc(`users/${userId}`)
+        .create({
+            email,
+            firstName,
+            lastName,
+        })
+        .then(() =>
+            Auth.createUser({
+                uid: userId,
+                email,
+                password,
+                emailVerified: false,
+                displayName: `${firstName} ${lastName}`,
+                disabled: false,
+            }),
+        )
 }
 
 export const createFirebaseToken = async ({
@@ -55,8 +70,8 @@ export const createFirebaseToken = async ({
     userId: string
     role: Role
 }): Promise<string> => {
-    const FirebaseAuth = await initializeFirebaseAuthIfNeeded()
-    return await FirebaseAuth.setCustomUserClaims(userId, { role }).then(() =>
-        FirebaseAuth.createCustomToken(userId, { role }),
+    const { Auth } = await initializeFirebaseIfNeeded()
+    return Auth.setCustomUserClaims(userId, { role }).then(() =>
+        Auth.createCustomToken(userId, { role }),
     )
 }
