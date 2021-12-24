@@ -1,7 +1,6 @@
 # BE Template Service
 
 ![Build Status](https://github.com/jackcohen5/be-template/actions/workflows/build.yaml/badge.svg?branch=master)
-[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=jackcohen5/be-template)](https://dependabot.com)
 
 This template service gives you the latest in modern JavaScript (Typescript, testing with Jest, linting with ESLint, and formatting with Prettier), the ease and power of Serverless, and bootstrapped AWS (DynamoDB, S3 and SQS) infrastructure.
 
