@@ -98,9 +98,9 @@ provider:
             jwtAuthorizer:
                 type: jwt
                 identitySource: $request.header.Authorization
-                issuerUrl: be-template-service@fe-template.iam.gserviceaccount.com
+                issuerUrl: https://securetoken.google.com/fe-template
                 audience:
-                    - https://identitytoolkit.googleapis.com/google.identity.identitytoolkit.v1.IdentityToolkit
+                    - fe-template
 
 configValidationMode: error
 variablesResolutionMode: 20210326
