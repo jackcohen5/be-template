@@ -113,7 +113,7 @@ functions:
         handler: src/functions/example/index.default
         events:
             - httpApi:
-                path: /api/example/
+                path: /api/example
                 method: get
 
     signUp:
@@ -122,14 +122,14 @@ functions:
             FIREBASE_SERVICE_ACCOUNT_KEY_PATH: /be-template/firebase/service-account-key
         events:
             - httpApi:
-                path: /api/signUp/
+                path: /api/signUp
                 method: post
 
     list:
         handler: src/functions/list/index.default
         events:
             - httpApi:
-                path: /api/orders/
+                path: /api/orders
                 method: get
                 authorizer:
                     name: jwtAuthorizer
@@ -139,7 +139,7 @@ functions:
         handler: src/functions/create/index.default
         events:
             - httpApi:
-                path: /api/orders/
+                path: /api/orders
                 method: post
                 authorizer:
                     name: jwtAuthorizer
@@ -148,7 +148,7 @@ functions:
         handler: src/functions/put/index.default
         events:
             - httpApi:
-                path: /api/orders/{orderId}/
+                path: /api/orders/{orderId}
                 method: put
                 authorizer:
                     name: jwtAuthorizer
@@ -157,7 +157,7 @@ functions:
         handler: src/functions/get/index.default
         events:
             - httpApi:
-                path: /api/orders/{orderId}/
+                path: /api/orders/{orderId}
                 method: get
                 authorizer:
                     name: jwtAuthorizer
@@ -166,7 +166,7 @@ functions:
         handler: src/functions/delete/index.default
         events:
             - httpApi:
-                path: /api/orders/{orderId}/
+                path: /api/orders/{orderId}
                 method: delete
                 authorizer:
                     name: jwtAuthorizer
@@ -175,7 +175,7 @@ functions:
         handler: src/functions/upload/index.default
         events:
             - httpApi:
-                path: /api/documents/upload/
+                path: /api/documents/upload
                 method: post
                 authorizer:
                     name: jwtAuthorizer
@@ -184,7 +184,7 @@ functions:
         handler: src/functions/download/index.default
         events:
             - httpApi:
-                path: /api/documents/download/{fileId}/
+                path: /api/documents/download/{fileId}
                 method: get
                 authorizer:
                     name: jwtAuthorizer
