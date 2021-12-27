@@ -2,13 +2,17 @@ service: be-template-service
 
 custom:
     stage: ${opt:stage, "development"}
+    region: us-east-1
+    arn:
+        common: ${self:custom.region}:${aws:accountId}
+        global: :${aws:accountId}
     dynamoDb:
         tableName: be-template-${self:custom.stage}
         billingMode: PAY_PER_REQUEST
     s3:
         bucketName: be-template-bucket-${self:custom.stage}
     sqs:
-        queueName: be-template-${self:custom.stage}
+        queueName: be-template-queue-${self:custom.stage}
     common:
         deletionPolicies:
             development: Delete
@@ -44,11 +48,11 @@ resources:
 provider:
     name: aws
     runtime: nodejs14.x
-    region: us-east-1
+    region: ${self:custom.region}
     stage: ${self:custom.stage}
     environment:
         AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
-        REGION: ${self:provider.region}
+        REGION: ${self:custom.region}
         DYNAMODB_TABLE: ${self:custom.dynamoDb.tableName}
         S3_BUCKET_NAME: ${self:custom.s3.bucketName}
         SQS_QUEUE: ${self:custom.sqs.queueName}
@@ -63,12 +67,12 @@ provider:
           - dynamodb:Query
           - dynamodb:UpdateItem
         Resource:
-          - "arn:aws:dynamodb:*:*:table/${self:custom.dynamoDb.tableName}"
+          - arn:aws:dynamodb:${self:custom.arn.common}:table/${self:custom.dynamoDb.tableName}
       - Effect: "Allow"
         Action:
           - dynamodb:Query
         Resource:
-          - "arn:aws:dynamodb:*:*:table/${self:custom.dynamoDb.tableName}/index/GSI1"
+          - arn:aws:dynamodb:${self:custom.arn.common}:table/${self:custom.dynamoDb.tableName}/index/GSI1
       - Effect: "Allow"
         Action:
           - sqs:GetQueueUrl
@@ -81,11 +85,15 @@ provider:
         Action:
           - s3:GetObject
           - s3:PutObject
-        Resource: "arn:aws:s3:::${self:custom.s3.bucketName}/*"
+        Resource:
+          - Fn::GetAtt:
+            - TemplateS3Bucket
+            - Arn
       - Effect: "Allow"
         Action:
           - ssm:GetParameter
-        Resource: "arn:aws:ssm:::parameter/be-template/*"
+        Resource:
+          - arn:aws:ssm:${self:custom.arn.common}:parameter/be-template/firebase/service-account-key
     tracing:
         apiGateway: true
         lambda: true
