@@ -129,7 +129,7 @@ functions:
         handler: src/functions/list/index.default
         events:
             - httpApi:
-                path: /api/TEMPLATE_NAME/
+                path: /api/orders/
                 method: get
                 authorizer:
                     name: jwtAuthorizer
@@ -139,7 +139,7 @@ functions:
         handler: src/functions/create/index.default
         events:
             - httpApi:
-                path: /api/TEMPLATE_NAME/
+                path: /api/orders/
                 method: post
                 authorizer:
                     name: jwtAuthorizer
@@ -148,7 +148,7 @@ functions:
         handler: src/functions/put/index.default
         events:
             - httpApi:
-                path: /api/TEMPLATE_NAME/{TEMPLATE_NAME_SK}/
+                path: /api/orders/{orderId}/
                 method: put
                 authorizer:
                     name: jwtAuthorizer
@@ -157,7 +157,7 @@ functions:
         handler: src/functions/get/index.default
         events:
             - httpApi:
-                path: /api/TEMPLATE_NAME/{TEMPLATE_NAME_SK}/
+                path: /api/orders/{orderId}/
                 method: get
                 authorizer:
                     name: jwtAuthorizer
@@ -166,7 +166,7 @@ functions:
         handler: src/functions/delete/index.default
         events:
             - httpApi:
-                path: /api/TEMPLATE_NAME/{TEMPLATE_NAME_SK}/
+                path: /api/orders/{orderId}/
                 method: delete
                 authorizer:
                     name: jwtAuthorizer
@@ -175,7 +175,7 @@ functions:
         handler: src/functions/upload/index.default
         events:
             - httpApi:
-                path: /api/TEMPLATE_NAME/upload/
+                path: /api/documents/upload/
                 method: post
                 authorizer:
                     name: jwtAuthorizer
@@ -184,7 +184,7 @@ functions:
         handler: src/functions/download/index.default
         events:
             - httpApi:
-                path: /api/TEMPLATE_NAME/download/{fileId}/
+                path: /api/documents/download/{fileId}/
                 method: get
                 authorizer:
                     name: jwtAuthorizer
@@ -194,7 +194,7 @@ functions:
         timeout: 30
         events:
             - eventBridge:
-                schedule: rate(10 minutes)
+                schedule: rate(10 days)
 
     consumer:
         handler: src/functions/consumer/index.handler

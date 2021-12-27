@@ -10,10 +10,10 @@ interface UploadPayload {
 const UploadView: FunctionHandler<UploadPayload> = async ({
     auth: { userId },
 }) => {
-    const itemId = uuid()
-    const key = `${userId}/${itemId}`
+    const fileId = uuid()
+    const key = `${userId}/${fileId}`
     const url = await generateUploadUrl(key)
-    return { data: { url } }
+    return { data: { url, fileId } }
 }
 
 export default Role1View(UploadView)

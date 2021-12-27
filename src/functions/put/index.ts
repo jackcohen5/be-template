@@ -8,10 +8,10 @@ interface PutPayload {
 const PutView: FunctionHandler<PutPayload> = async ({
     auth: { userId },
     body,
-    pathParameters,
+    pathParameters: { orderId },
 }) => {
     const pk = `USER#${userId}`
-    const sk = `ORDER#${pathParameters.TEMPLATE_NAME_SK}`
+    const sk = `ORDER#${orderId}`
     const item = await PutItem({ pk, sk, data: body })
     return { data: { item } }
 }

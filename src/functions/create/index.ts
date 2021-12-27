@@ -10,9 +10,9 @@ const CreateView: FunctionHandler<CreatePayload> = async ({
     auth: { userId },
     body: data,
 }) => {
-    const TEMPLATE_NAME_SK = uuidv4()
+    const orderId = uuidv4()
     const pk = `USER#${userId}`
-    const sk = `ORDER#${TEMPLATE_NAME_SK}`
+    const sk = `ORDER#${orderId}`
     const item = await PutItem({ pk, sk, data })
     return { data: { item }, statusCode: 201 }
 }

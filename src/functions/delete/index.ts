@@ -7,10 +7,10 @@ interface DeletePayload {
 
 const DeleteAPIView: FunctionHandler<DeletePayload> = async ({
     auth: { userId },
-    pathParameters: { TEMPLATE_NAME_SK },
+    pathParameters: { orderId },
 }) => {
     const pk = `USER#${userId}`
-    const sk = `ORDER#${TEMPLATE_NAME_SK}`
+    const sk = `ORDER#${orderId}`
     const item = await DeleteItem({ pk, sk })
     return { data: { item } }
 }
