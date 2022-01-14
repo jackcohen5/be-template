@@ -1,6 +1,4 @@
-2021-12-27T19:47:40.482Z	a521e38a-f7d2-4897-a615-8737241f1b9d	ERROR	AccessDeniedException: User: arn:aws:sts::479663464052:assumed-role/be-template-service-production-us-east-1-lambdaRole/be-template-service-production-signUp is not authorized to perform: ssm:GetParameter on resource: arn:aws:ssm:us-east-1:479663464052:parameter/be-template/firebase/service-account-key because no identity-based policy allows the ssm:GetParameter action
-
-
+- Netlify build CD
 - IAM user for deploy service
 - IAM acct per env
 
