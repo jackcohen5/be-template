@@ -2,6 +2,16 @@
 
 In order to use this template, you will first need to follow the following steps.
 
+## Setup AWS
+
+1. Create a new AWS organization with 3 accounts; one for development, staging, and production.
+
+2. Clone the [infrastructure template](https://github.com/jackcohen5/infrastructure-template) and deploy it using credentials for each account. Make a note of the Github role ARNs created for each environment.
+
+## Setup Github Actions
+
+1. Create the `AWS_ROLE_TO_ASSUME_DEVELOPMENT`, `AWS_ROLE_TO_ASSUME_STAGING`, and `AWS_ROLE_TO_ASSUME_PRODUCTION` Github repository secrets matching the ARNs created in the previous step.
+
 ## Setup Firebase
 
 1. Create a service account with a JSON private key in your Firebase project.

@@ -9,6 +9,9 @@ jobs:
   deploy_staging:
     name: Deploy functions to the staging environment
     runs-on: ubuntu-latest
+    permissions:
+        id-token: write
+        contents: read
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
     - name: Checkout
@@ -18,10 +21,10 @@ jobs:
       with:
         node-version: '14.18.1'
         cache: 'yarn'
-    - name: Configure AWS credentials from staging account
+    - name: Configure Staging account AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        role-to-assume: arn:aws:iam::111111111111:role/be-template-deploy-role-staging
+        role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME_STAGING }}
         aws-region: us-east-1
     - name: Create .env file
       run: |
@@ -33,6 +36,9 @@ jobs:
   deploy_production:
     name: Deploy functions to the production environment
     runs-on: ubuntu-latest
+    permissions:
+        id-token: write
+        contents: read
     needs: deploy_staging
     steps:
     - name: Checkout
@@ -42,10 +48,10 @@ jobs:
       with:
         node-version: '14.18.1'
         cache: 'yarn'
-    - name: Configure AWS credentials from production account
+    - name: Configure Production account AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        role-to-assume: arn:aws:iam::222222222222:role/be-template-deploy-role-production
+        role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME_PRODUCTION }}
         aws-region: us-east-1
     - name: Create .env file
       run: |
