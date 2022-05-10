@@ -32,7 +32,6 @@ package:
 ### PLUGINS
 
 plugins:
-    - serverless-dotenv-plugin
     - serverless-webpack
     - serverless-offline
 
