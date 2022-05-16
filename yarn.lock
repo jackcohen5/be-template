@@ -2668,10 +2668,10 @@ atomic-batcher@^1.0.2:
   resolved "https://registry.yarnpkg.com/atomic-batcher/-/atomic-batcher-1.0.2.tgz#d16901d10ccec59516c197b9ccd8930689b813b4"
   integrity sha1-0WkB0QzOxZUWwZe5zNiTBom4E7Q=
 
-aws-sdk@^2.1097.0, aws-sdk@^2.1124.0, aws-sdk@^2.997.0:
-  version "2.1131.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.1131.0.tgz#0d235c6335587532d280a0d3a5971d48766d2e2a"
-  integrity sha512-Ic3f2fSgVhYDQ0OBGxE6ODtSwaKyxBPGrI2RGrYt2Oj0Z8f227P7dB90o9X7y2MtnuJ4WoAzkf3Vc1c1UnnZlA==
+aws-sdk@^2.1097.0, aws-sdk@^2.1124.0, aws-sdk@^2.1136.0:
+  version "2.1136.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.1136.0.tgz#d103aed0313af2c254a2dbd54823af8057c7a0b9"
+  integrity sha512-cuXPB1lNoiK/oNTAN+Bud2Pp8/PvY7erL2DYPVN2zsk2nh9e8VG3yldf6KcEO6mm4q/FgZc4X6Zq+fOyuBY/wA==
   dependencies:
     buffer "4.9.2"
     events "1.1.1"
