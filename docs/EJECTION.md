@@ -22,6 +22,10 @@ In order to use this template, you will first need to follow the following steps
 
 4. Update the jwtAuthorizer in the [serverless.yml](../serverless.yml) with the issuerUrl and audience of your Firebase project.
 
+## Setup Firestore
+
+1. Enable Firestore in your Firebase project.
+
 ## Setup branch protection
 
 1. Add a new branch protection rule on your repo's main branch in Github, requiring the CI Github Action checks to pass before any merges can occur.
