@@ -26,6 +26,14 @@ In order to use this template, you will first need to follow the following steps
 
 1. Enable Firestore in your Firebase project.
 
+2. Add the below security rule to your Firestore configuration.
+
+```
+match /users/{userId} {
+    allow read, update, delete: if request.auth != null && request.auth.uid == userId;
+}
+```
+
 ## Setup branch protection
 
 1. Add a new branch protection rule on your repo's main branch in Github, requiring the CI Github Action checks to pass before any merges can occur.
