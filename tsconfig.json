@@ -2,7 +2,9 @@
   "compilerOptions": {
     "outDir": ".build",
     "target": "es5",
-    "baseUrl": "src"
+    "baseUrl": "src",
+    "esModuleInterop": true,
+    "noImplicitAny": true
   },
   "include": ["src/**/*.ts"]
 }

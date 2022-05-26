@@ -23,7 +23,8 @@ custom:
         identitySource: method.request.header.Authorization
         type: token
     webpack:
-        webpackConfig: ./webpack.config.js
+        webpackConfig: ./webpack.config.ts
+        excludeFiles: src/**/*.test.ts
         packager: 'yarn'
 
 package:
