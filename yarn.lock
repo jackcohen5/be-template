@@ -1893,14 +1893,14 @@
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-2.0.0.tgz#f544a148d3ab35801c1f633a7441fd87c2e484bf"
   integrity sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==
 
-"@tophat/eslint-config@^0.12.0":
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/@tophat/eslint-config/-/eslint-config-0.12.0.tgz#658d3c24c40725ec56807d98efbc6aee93d86809"
-  integrity sha512-c0p2k1wK7dBr21HCGH5ebYNEoRZ1GfbY5r2ij2BGxEOWes/j8ns224qaaELzQQiNF8FuA/VyfZ1vk+Ng38EvDQ==
+"@tophat/eslint-config@^3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@tophat/eslint-config/-/eslint-config-3.2.0.tgz#049df1be6713b1f8e47e3a86bafa9b49d25dab3a"
+  integrity sha512-pYtaB2z8hDvHJu2fDPbCOq4j7FIEMkZUux2C3ulTXBLnAVUP2OWZ46U7SEzvXM6I9jmk9O4sFsh/6xleHcIV2Q==
   dependencies:
     "@tophat/eslint-import-resolver-require" "^0.1.3"
     eslint-import-resolver-node "^0.3.6"
-    eslint-import-resolver-typescript "^2.5.0"
+    eslint-import-resolver-typescript "^2.7.1"
 
 "@tophat/eslint-import-resolver-require@^0.1.3":
   version "0.1.3"
@@ -4006,7 +4006,7 @@ eslint-import-resolver-node@^0.3.6:
     debug "^3.2.7"
     resolve "^1.20.0"
 
-eslint-import-resolver-typescript@^2.5.0:
+eslint-import-resolver-typescript@^2.5.0, eslint-import-resolver-typescript@^2.7.1:
   version "2.7.1"
   resolved "https://registry.yarnpkg.com/eslint-import-resolver-typescript/-/eslint-import-resolver-typescript-2.7.1.tgz#a90a4a1c80da8d632df25994c4c5fdcdd02b8751"
   integrity sha512-00UbgGwV8bSgUv34igBDbTOtKhqoRMy9bFjNehT40bXg6585PNIct8HhXZ0SybqB9rWtXj9crcku8ndDn/gIqQ==
